@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide d'annotation : familles REJETÉ</title><style>
+  :root{--paper:#f4f1e9;--card:#fffdf8;--ink:#211e1c;--muted:#6c6862;--line:#e0d9cc;
+    --accent:#2f4750;--accent-soft:#e2eaeb;--bord:#8c2b2b;--ok:#2f6b46;--warn:#9a6a1e;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:ui-sans-serif,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.6}
+  .wrap{max-width:960px;margin:0 auto;padding:34px 24px 80px}
+  h1{font-size:29px;margin:0 0 4px}h1 b{color:var(--accent)}
+  .sub{font-family:var(--sans);font-size:13px;color:var(--muted);margin-bottom:8px}
+  .src{font-family:var(--sans);font-size:12.5px;color:var(--muted);border-left:3px solid var(--accent);padding:8px 12px;background:var(--card);border-radius:0 8px 8px 0;margin:16px 0 26px}
+  h2{font-family:var(--sans);font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:34px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent)}
+  h3{font-family:var(--sans);font-size:14px;font-weight:700;margin:18px 0 4px;color:#243a40}
+  p,li{font-size:15.5px}
+  table{width:100%;border-collapse:collapse;margin:10px 0 6px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-family:var(--sans);font-size:13.5px}
+  th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--accent-soft);color:#243a40;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  tr:last-child td{border-bottom:none}
+  .fx{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#e7ecec;padding:1px 5px;border-radius:4px;color:#243a40}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:12px 0}
+  .box.warn{border-left:4px solid var(--warn)}.box.key{border-left:4px solid var(--accent);background:#eef3f3}
+  .lbl{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  mark{background:#ffe66b;padding:0 3px;border-radius:2px}
+  .small{font-size:13px;color:var(--muted);font-family:var(--sans)}
+  .art{font-weight:700;color:var(--bord);white-space:nowrap}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}
+  details[open]{box-shadow:0 2px 8px rgba(30,50,55,.10)}
+  summary{cursor:pointer;padding:13px 16px;font-family:var(--sans);font-weight:700;font-size:15.5px;color:#243a40;background:var(--accent-soft);user-select:none;list-style:none;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  summary::before{content:"▸"}details[open] summary::before{content:"▾"}
+  summary .def{font-family:var(--serif);font-weight:400;font-size:14px;color:var(--muted);font-style:italic}
+  .inner{padding:6px 16px 16px}
+  .ex{border-left:3px solid var(--ok);background:#f4f8f4;border-radius:0 8px 8px 0;padding:8px 12px;margin:8px 0}
+  .ex .exm{font-family:var(--sans);font-size:11.5px;font-weight:700;color:var(--ok);margin-bottom:3px}
+  .ex .ext{font-size:14px;line-height:1.5;font-style:italic;color:#2c3a2e}
+  .bore{display:inline-block;font-family:var(--sans);font-size:10.5px;font-weight:700;border-radius:12px;padding:1px 9px;vertical-align:middle;color:#fff}
+  .bore.rnsm{background:#7a1f1f}.bore.irrec{background:#8a6a1f}.bore.fond{background:#2f4750}
+  details.exd,details.warnd{background:transparent;border:1px dashed var(--line);border-radius:8px;margin:8px 0;box-shadow:none}
+  details.exd summary{background:#eef5ee;color:#2f6b46;font-size:12.5px;padding:8px 12px}
+  details.warnd summary{background:#faf3e2;color:#8a6a1f;font-size:12.5px;padding:8px 12px}
+  details.exd .inner,details.warnd .inner{padding:4px 12px 10px}
+
+  .tabs{position:sticky;top:0;background:var(--paper);padding:10px 0 8px;display:flex;gap:8px;z-index:5;border-bottom:2px solid var(--accent);margin-bottom:6px}
+  .tb{font-family:var(--sans);font-size:13.5px;font-weight:700;color:#243a40;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 16px;cursor:pointer}
+  .tb.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .pane{display:none}.pane.on{display:block}
+  .exs{font-style:italic;color:#2c3a2e;font-size:13px}
+  .memo p{margin:6px 0}
+  .memo .fam{margin:14px 0 4px;font-family:var(--sans);font-weight:700;font-size:15px}
+  .memo li{margin:7px 0;font-size:14.5px}
+
+  table.lean{font-size:13px}
+  table.lean td{padding:7px 10px}
+  table.lean tr.famh td{background:var(--accent-soft);font-weight:800;font-size:13px;color:#3c3833;letter-spacing:.03em}
+  table.lean td.rp{font-weight:700;white-space:nowrap}
+  table.lean td.ex{font-style:italic;color:#2c3a2e}
+
+  .famt{margin:20px 0 6px;font-family:var(--sans);font-weight:800;font-size:15.5px;color:#3c3833;border-bottom:2px solid var(--line);padding-bottom:4px}
+  .famt .fd{font-weight:400;font-size:13px;color:var(--muted)}
+</style></head><body><div class="wrap">
+
+<h1>Guide d'annotation : <b>Familles REJETÉ</b></h1>
+<div class="sub">Campagne multi-annotateurs · unité = le <b>moyen</b> (une paire moyen ↔ réponse de la Cour) · Cour de cassation, chambres civiles, 2016-2025</div>
+<div class="src">Fondement doctrinal : Boré &amp; Boré, <i>La cassation en matière civile</i>, Dalloz Action, 6<sup>e</sup> éd. On annote la <b>famille du rejet</b>. Il y en a trois. Le reste de ce guide (sous-types, manières de rejeter, formulations) n'est <b>pas à annoter</b> : ce sont des repères pour reconnaître chaque famille dans ses différentes formulations.</div>
+
+
+<div class="tabs"><button class="tb on" data-t="guide">Guide</button><button class="tb" data-t="memo">Aide-mémoire</button></div>
+<div class="pane on" id="p-guide">
+<h2>1 · Ce qu'on annote : les trois familles du rejet</h2>
+<p>Quand la Cour de cassation rejette un moyen, elle le fait de l'une de trois manières. Ces trois manières sont les <b>trois familles</b> à annoter.</p>
+<div class="box key">
+<span class="bore rnsm">RNSM</span> <b>Rejet non spécialement motivé</b> : le moyen est écarté par une <b>phrase rituelle</b>, sans explication (<span class="art">art. 1014 CPC</span>)<br><br>
+<span class="bore irrec">IRRECEVABILITÉ</span> : le moyen bute sur un <b>obstacle de recevabilité</b>, il n'est pas examiné au fond<br><br>
+<span class="bore fond">FOND</span> : le moyen est <b>examiné et jugé mal fondé</b>, la Cour explique pourquoi la cour d'appel a bien jugé<br><br>
+</div>
+<div class="box key" style="border-left-color:#7a1f1f;background:#fdf3f2"><span class="lbl" style="color:#7a1f1f">Multi-label : cocher PLUSIEURS familles est possible</span><br>Un même bloc peut cumuler deux familles : phrase rituelle sur certaines branches et rejet motivé sur d'autres, ou moyen pour partie irrecevable et mal fondé pour le surplus. Dans ce cas, <b>cocher toutes les familles présentes</b>. Ne pas chercher une famille unique quand le texte en montre deux.</div>
+<div class="box warn"><span class="lbl">À ignorer : la fin de l'arrêt (« Portée et conséquences »)</span><br>
+Dans les arrêts qui cassent sur d'autres moyens, le texte affiché peut contenir une section « Portée et conséquences de la cassation », ou un passage final « la cassation entraîne… par voie de conséquence ». Ces passages concernent les suites de la cassation prononcée sur d'autres moyens. Ils ne disent rien du sort du moyen affiché. On n'en tient aucun compte. Le sort se lit dans la <b>réponse faite au moyen</b>.</div>
+<div class="box warn"><span class="lbl">Voix du pourvoi, voix de la Cour</span><br>Ne lire que la <b>réponse de la Cour</b> au moyen, jamais la reformulation du grief. <span class="fx">« le moyen fait grief à l'arrêt d'avoir… »</span> est la voix du pourvoi → n'entre pas en compte. <span class="fx">« la cour d'appel a souverainement estimé… »</span> est la voix de la Cour → c'est elle qu'on annote.</div>
+
+<h2>2 · Comment choisir la famille</h2>
+<p>Trois questions, dans l'ordre :</p>
+<table><tbody><tr><th>Question</th><th>Si oui</th></tr>
+<tr><td>1. La réponse est-elle la <b>phrase rituelle</b> (« il n'y a pas lieu de statuer par une décision spécialement motivée… », « n'est manifestement pas de nature à entraîner la cassation ») ou son visa <span class="art">art. 1014</span> ?</td><td><span class="bore rnsm">RNSM</span><div class="small">⚠ La même phrase peut nommer un second fondement (« le troisième moyen <b>qui est irrecevable</b> et les autres moyens qui ne sont manifestement pas… ») : cocher aussi cette famille, ici IRRECEVABILITÉ.</div></td></tr>
+<tr><td>2. La Cour oppose-t-elle un <b>obstacle de recevabilité</b> (« irrecevable », « inopérant », moyen nouveau, contraire à la thèse soutenue, imprécis, sans portée) sans juger le fond ?</td><td><span class="bore irrec">IRRECEVABILITÉ</span></td></tr>
+<tr><td>3. Sinon : la Cour <b>explique</b> pourquoi le moyen a tort (rejet motivé).</td><td><span class="bore fond">FOND</span></td></tr>
+</tbody></table>
+<p class="small">Si le bloc traite plusieurs branches ou moyens de manières différentes, cocher toutes les familles réellement présentes.</p>
+
+<h2>3 · Les familles : définitions, repères, formulations, exemples</h2>
+
+<details open><summary>RNSM : rejet non spécialement motivé<span class="def">le moyen est écarté par la phrase rituelle, sans motivation</span></summary><div class="inner">
+<p><b>Définition :</b> depuis 2014, la Cour peut écarter un moyen « qui n'est manifestement pas de nature à entraîner la cassation » <b>sans motivation spéciale</b>. La réponse est une phrase standard, sans explication. Article signature : <span class="art">art. 1014 CPC</span> (alinéa 1 : tout le pourvoi, alinéa 2 : certains moyens seulement, le reste étant motivé). C'est le rejet le plus fréquent du corpus.</p>
+<p><b>Formulations clés :</b> <span class="fx">« il n'y a pas lieu de statuer par une décision spécialement motivée sur ce moyen »</span> · <span class="fx">« ce moyen n'est manifestement pas de nature à entraîner la cassation »</span> · <span class="fx">« ces moyens ne sont manifestement pas de nature à entraîner la cassation »</span> · visa <span class="fx">« Vu l'article 1014, alinéa 2, du code de procédure civile »</span> · <span class="fx">« le moyen, ci-après annexé, n'est manifestement pas… »</span> · <span class="fx">« il n'y a pas lieu de statuer par une décision spécialement motivée sur ces griefs »</span></p>
+<details class="warnd" open><summary>⚠ Ne pas confondre : phrase rituelle vs rejet motivé</summary><div class="inner"><p style="margin:6px 0"><b>Le test</b> : la phrase rituelle (ou son visa <span class="art">1014</span>) → RNSM ; la Cour explique pourquoi le moyen a tort → FOND.</p><ul style="margin:4px 0 6px 18px;padding:0"><li>Les deux coexistent souvent dans un même arrêt : phrase rituelle sur certaines branches, rejet motivé sur d'autres. <b>Cocher les deux familles</b> si les deux sont présentes dans le bloc.</li><li>La phrase rituelle peut aussi nommer elle-même une irrecevabilité : « le troisième moyen <b>qui est irrecevable</b> et les autres moyens qui ne sont manifestement pas de nature à entraîner la cassation » → cocher <b>RNSM et IRRECEVABILITÉ</b>.</li></ul></div></details>
+</div></details>
+
+<details><summary>IRRECEVABILITÉ<span class="def">obstacle de recevabilité, pas d'examen au fond</span></summary><div class="inner">
+<p><b>Définition :</b> avant d'examiner si un moyen a raison, la Cour vérifie qu'il peut être présenté. Est écarté <b>sans examen au fond</b> le moyen qui invoque un argument jamais soumis aux juges du fond, qui contredit ce que la partie soutenait devant eux, qui critique un motif sans incidence sur la décision, ou qui demande à la Cour de rejuger les faits. Verdicts types : <span class="fx">« le moyen est irrecevable »</span> · <span class="fx">« le moyen est inopérant »</span>.</p>
+<p class="small">Les cas ci-dessous sont des repères de lecture. On annote la famille IRRECEVABILITÉ, pas le repère.</p>
+<table><tbody><tr><th>Repère</th><th>Ce que ça recouvre</th><th>Formulations clés</th></tr>
+<tr><td><b>Moyen nouveau</b></td><td>L'argument n'a jamais été soumis aux juges du fond et exige d'apprécier des faits.</td><td>« moyen nouveau, mélangé de fait et de droit, partant irrecevable »</td></tr>
+<tr><td><b>Thèse contraire</b></td><td>Le moyen contredit la position que la partie défendait devant les juges du fond.</td><td>« incompatible avec la thèse soutenue devant les juges du fond »</td></tr>
+<tr><td><b>Motif surabondant</b></td><td>Le moyen critique un motif dont la décision ne dépend pas.</td><td>« critique un motif surabondant », « s'attaque à des motifs surabondants »</td></tr>
+<tr><td><b>Moyen imprécis</b></td><td>Le moyen ne dit pas clairement ce qu'il reproche à l'arrêt.</td><td>« le moyen ne précise pas… »</td></tr>
+<tr><td><b>Sans intérêt / sans portée</b></td><td>Même s'il avait raison, cela ne changerait rien pour la partie.</td><td>« moyen sans intérêt », « privé de portée »</td></tr>
+<tr><td><b>Moyen inopérant</b></td><td>Le moyen peut être exact mais sans effet sur la solution : l'erreur reprochée n'est pas causale. Inclut le moyen <b>mal dirigé</b>, qui attaque autre chose que la décision.</td><td>« le moyen est inopérant », « la critique est inopérante »</td></tr>
+<tr><td><b>Irrecevabilité simple</b></td><td>« irrecevable » sans plus de précision.</td><td>« le moyen est irrecevable » (nu), « le moyen est donc irrecevable »</td></tr>
+</tbody></table>
+<details class="warnd" open><summary>⚠ Ne pas confondre : irrecevable/inopérant vs mal fondé</summary><div class="inner"><p style="margin:6px 0"><b>IRRECEVABILITÉ</b> : l'argumentation est écartée sans être jugée (« irrecevable »), ou exacte mais inefficace en la cause (« inopérant »).<br><b>FOND</b> : l'argumentation est examinée et jugée fausse (« n'est pas fondé »).<br>Le mot décisif est celui de la Cour.</p><p style="margin:6px 0"><b>Motifs surabondants</b> (cas fréquent). Un motif surabondant est un motif en trop : la décision attaquée tient sans lui, sur un autre motif qui suffit.</p><ul style="margin:4px 0 6px 18px;padding:0"><li>Critiquer un motif en trop ne peut rien changer au résultat, même si la critique était juste : grief <b>inopérant</b> → IRRECEVABILITÉ.</li><li>Pour dire que le motif est en trop, la Cour valide d'abord le motif qui suffit (« en a exactement déduit », « par une appréciation souveraine », « a pu retenir ») : repère <b>FOND</b>.</li><li>Donc cocher les deux familles : IRRECEVABILITÉ et FOND.</li></ul><p style="margin:6px 0"><b>Attention à qui est « inopérant »</b> : seul le <b>moyen, le grief ou la branche</b> inopérant fait IRRECEVABILITÉ. « Sans être tenue de procéder à une <b>recherche</b> inopérante » à l'intérieur d'une approbation = la Cour justifie au fond que la recherche était inutile → FOND seul.</p><p style="margin:6px 0"><b>Deux formulations, et ce que chacune impose</b> :</p><ul style="margin:4px 0 6px 18px;padding:0"><li>« le moyen, qui critique des motifs surabondants, ne peut être accueilli » : la phrase ne porte que l'inopérance → IRRECEVABILITÉ. Cocher AUSSI FOND seulement si le bloc valide le fondement suffisant (« en a exactement déduit », « par une appréciation souveraine », « a pu retenir »), ce qui est le cas le plus fréquent. Sans aucune validation (« le moyen, qui critique des motifs surabondants, est inopérant » sec) : IRRECEVABILITÉ seule.</li><li>« abstraction faite du motif surabondant critiqué par le moyen, la cour d'appel a légalement justifié sa décision » : les deux voix sont dans la phrase même (grief privé d'objet + validation du reste) → IRRECEVABILITÉ et FOND.</li></ul></div></details>
+</div></details>
+
+<details><summary>FOND : moyen examiné et jugé mal fondé<span class="def">la Cour explique pourquoi la cour d'appel a bien jugé</span></summary><div class="inner">
+<p><b>Définition :</b> la Cour examine le moyen et le rejette en expliquant pourquoi la cour d'appel a bien jugé. Verdicts types : <span class="fx">« le moyen n'est pas fondé »</span> · <span class="fx">« d'où il suit que le moyen n'est pas fondé »</span> · <span class="fx">« ne saurait prospérer »</span> · <span class="fx">« n'encourt pas le grief du moyen »</span> · <span class="fx">« le moyen n'est fondé en aucune de ses branches »</span> · <span class="fx">« a légalement justifié sa décision »</span>.</p>
+<p class="small">La Cour rejette au fond de plusieurs manières. Le tableau les montre d'un coup. Ce sont des repères de lecture : on annote la famille FOND.</p>
+<table><tbody><tr><th>Repère</th><th>Ce que ça recouvre</th><th>Formulations clés</th></tr>
+<tr><td><b>Mal fondé simple</b></td><td>La Cour expose pourquoi la critique est juridiquement fausse.</td><td>« le moyen n'est pas fondé », « ne saurait prospérer », « n'encourt pas le grief ». ⚠ « ne peut être accueilli » clôt tous les rejets (inopérant, souveraine…) : pas un marqueur de famille.</td></tr>
+<tr><td><b>Appréciation souveraine</b></td><td>La question critiquée (preuves, préjudice, contrat ambigu) relevait du pouvoir souverain des juges du fond.</td><td>« a souverainement estimé / apprécié / retenu », « ne tend qu'à remettre en cause l'appréciation souveraine »</td></tr>
+<tr><td><b>Approbation souple</b></td><td>La cour d'appel « a pu » déduire ou décider ainsi : solution admissible.</td><td>« a pu en déduire / décider / retenir »</td></tr>
+<tr><td><b>Approbation ferme</b></td><td>La qualification est validée avec autorité.</td><td>« a exactement retenu », « c'est à bon droit que », « à juste titre », « exacte application »</td></tr>
+<tr><td><b>Substitution de motifs</b></td><td>La Cour remplace le motif critiqué par un motif de pur droit (<span class="art">art. 620 CPC</span>). La décision se retrouve justifiée par ce nouveau motif.</td><td>« par ce motif de pur droit, substitué à ceux critiqués », « la décision déférée se trouve légalement justifiée »</td></tr>
+<tr><td><b>Décision légalement justifiée</b></td><td>Formule de clôture, forme active : la cour d'appel a donné elle-même une base légale suffisante à sa décision. Sans substitution.</td><td>« a légalement justifié sa décision », « a légalement justifié sa décision de ce chef »</td></tr>
+<tr><td><b>Motifs propres et adoptés</b></td><td>La cour d'appel avait repris les motifs du premier juge. S'ajoute toujours à un autre repère.</td><td>« par motifs propres et adoptés », « adoptant les motifs »</td></tr>
+<tr><td><b>Motif surabondant neutralisé</b></td><td>Le motif critiqué était surabondant, la décision tient sur d'autres motifs.</td><td>« abstraction faite du motif erroné mais surabondant », « motifs surabondants »</td></tr>
+<tr><td><b>Manque en fait</b></td><td>Le moyen prête à l'arrêt ce qu'il n'a pas dit.</td><td>« le moyen manque en fait », « manque par le fait qui lui sert de base »</td></tr>
+<tr><td><b>Manque en droit</b></td><td>Le cumul de fondements dénoncé était légalement possible.</td><td>« le moyen manque en droit »</td></tr>
+<tr><td><b>Contrôle de proportionnalité</b></td><td>Rejet validant une balance des intérêts.</td><td>« atteinte [non] disproportionnée », « juste équilibre »</td></tr>
+</tbody></table>
+<details class="warnd"><summary>⚠ Attention : la même expression avant une cassation</summary><div class="inner">« Pour statuer ainsi, l'arrêt retient, par motifs propres et adoptés… » apparaît aussi dans la récitation des motifs qui précède une cassation. Vérifier que le contexte est bien un rejet.</div></details>
+</div></details>
+
+<h2>4 · Blocs mixtes &amp; rejet sans formule</h2>
+<table><tbody><tr><th>Situation</th><th>Conduite</th></tr>
+<tr><td>Phrase rituelle sur certaines branches + rejet motivé sur d'autres</td><td>cocher <b>RNSM et FOND</b></td></tr>
+<tr><td>« Le moyen, pour partie irrecevable, n'est pas fondé pour le surplus »</td><td>cocher <b>IRRECEVABILITÉ et FOND</b></td></tr>
+<tr><td>Rejet sans aucune formule reconnaissable (paraphrase pure du raisonnement, rejet implicite)</td><td>cocher <b>« Indéterminé »</b> (touche 4) et décrire en note libre</td></tr>
+</tbody></table>
+
+<h2>5 · Récapitulatif des articles</h2>
+<table><tbody><tr><th>Article</th><th>Ce qu'il dit</th><th>Famille associée</th></tr>
+<tr><td><span class="art">1014 CPC</span></td><td>rejet non spécialement motivé (al. 1 : pourvoi entier, al. 2 : certains moyens)</td><td>RNSM (signature)</td></tr>
+<tr><td><span class="art">620 CPC</span></td><td>la Cour peut rejeter en substituant un motif de pur droit</td><td>FOND (substitution)</td></tr>
+<tr><td><span class="art">978 CPC</span></td><td>exigences du mémoire (précision des moyens)</td><td>IRRECEVABILITÉ (imprécision)</td></tr>
+<tr><td><span class="art">606 à 608 CPC</span></td><td>pas de pourvoi indépendant contre une mesure provisoire ou un jugement qui ne tranche pas le fond</td><td>IRRECEVABILITÉ</td></tr>
+<tr><td>articles cités <b>dans le moyen</b> (455, 4, 1134, etc.)</td><td>textes que le demandeur invoquait. Leur présence ne dit rien du sort du moyen : lire la réponse de la Cour</td><td>aucune</td></tr>
+</tbody></table>
+
+<h2>6 · Procédure d'annotation</h2>
+<ul>
+<li>Lire la <b>réponse de la Cour</b> au moyen affiché (jamais le résumé du grief, jamais la fin « Portée et conséquences »).</li>
+<li>Poser les trois questions du §2, dans l'ordre, et cocher <b>la ou les familles</b> réellement présentes dans le bloc.</li>
+<li>En cas de doute (irrecevable vs mal fondé, phrase rituelle vs rejet motivé), relire les encadrés « Ne pas confondre » avant de cocher.</li>
+</ul>
+
+</div>
+
+<div class="pane memo" id="p-memo">
+<div class="box key" style="border-left-color:#7a1f1f;background:#fdf3f2"><span class="lbl" style="color:#7a1f1f">Multi-label : cocher plusieurs familles est possible</span><br>Phrase rituelle sur certaines branches et rejet motivé sur d'autres : cocher les deux familles.</div>
+<div class="famt"><span class="bore rnsm">RNSM</span> <span class="fd">rejet non spécialement motivé (<span class="art">art. 1014 CPC</span>)</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">phrase rituelle</td><td>le moyen est écarté sans explication</td><td>« il n'y a pas lieu de statuer par une décision spécialement motivée » · « n'est / ne sont manifestement pas de nature à entraîner la cassation » · visa « Vu l'article 1014, alinéa 2 » · « moyens annexés » · ⚠ si la phrase nomme en plus un moyen « irrecevable », cocher aussi IRRECEVABILITÉ</td></tr>
+</tbody></table>
+<div class="famt"><span class="bore irrec">IRRECEVABILITÉ</span> <span class="fd">obstacle de recevabilité, pas d'examen au fond</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">moyen nouveau</td><td>jamais soumis aux juges du fond</td><td>« moyen nouveau, mélangé de fait et de droit, partant irrecevable » · « nouveau et mélangé de fait et de droit, est donc irrecevable »</td></tr>
+<tr><td class="rp">thèse contraire</td><td>contredit la position défendue en appel</td><td>« incompatible avec la thèse soutenue devant les juges du fond » · « contraire à la position prise devant les juges du fond »</td></tr>
+<tr><td class="rp">motif surabondant</td><td>critique un motif dont la décision ne dépend pas</td><td>« critique un motif surabondant » · « s'attaque à des motifs surabondants »</td></tr>
+<tr><td class="rp">moyen imprécis</td><td>ne dit pas ce qu'il reproche (<span class="art">art. 978 CPC</span>)</td><td>« le moyen ne précise pas » · « ne satisfait pas aux exigences de l'article 978 »</td></tr>
+<tr><td class="rp">sans portée</td><td>sans effet pour la partie, même exact</td><td>« moyen sans intérêt » · « privé de portée » · « sans portée »</td></tr>
+<tr><td class="rp">moyen inopérant</td><td>exact mais non causal, ou mal dirigé. Un motif surabondant est un motif en trop : la décision tient sans lui, le critiquer ne peut rien changer au résultat, le grief est donc inopérant</td><td>« le moyen est inopérant » · « la critique est inopérante » · « le grief, inopérant en ce que » · « critique des motifs surabondants » · « abstraction faite du motif surabondant critiqué » · ⚠ avec une approbation du fondement suffisant (« exactement déduit », « appréciation souveraine »), cocher aussi FOND</td></tr>
+<tr><td class="rp">irrecevabilité simple</td><td>« irrecevable » sans précision</td><td>« le moyen est irrecevable » · « le moyen est donc irrecevable » · « partant irrecevable »</td></tr>
+</tbody></table>
+<div class="famt"><span class="bore fond">FOND</span> <span class="fd">moyen examiné et jugé mal fondé</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">mal fondé simple</td><td>la critique est juridiquement fausse</td><td>« le moyen n'est pas fondé » · « d'où il suit que le moyen n'est pas fondé » · « n'est fondé en aucune de ses branches » · « ne saurait prospérer » · « n'encourt pas le grief du moyen » · « ne peut qu'être écarté »</td></tr>
+<tr><td class="rp">appréciation souveraine</td><td>la question relevait des juges du fond</td><td>« a souverainement estimé / apprécié / retenu » · « souverainement évalué » · « appréciation souveraine des éléments de preuve » · « interprétation souveraine » · « dans l'exercice de son pouvoir souverain » · « ne tend qu'à remettre en cause l'appréciation souveraine »</td></tr>
+<tr><td class="rp">approbation souple</td><td>la cour d'appel « a pu » décider ainsi</td><td>« a pu en déduire » · « a pu décider » · « a pu retenir »</td></tr>
+<tr><td class="rp">approbation ferme</td><td>qualification validée avec autorité</td><td>« a exactement retenu / déduit / énoncé » · « c'est à bon droit que » · « à juste titre » · « a fait l'exacte application de » · « par une exacte application de »</td></tr>
+<tr><td class="rp">substitution de motifs</td><td>motif de pur droit substitué (<span class="art">art. 620</span>), décision maintenue</td><td>« par ce motif de pur droit, substitué à ceux critiqués » · « la décision déférée se trouve légalement justifiée »</td></tr>
+<tr><td class="rp">légalement justifiée</td><td>clôture active : la cour d'appel a donné une base légale suffisante, sans substitution</td><td>« a légalement justifié sa décision » · « a légalement justifié sa décision de ce chef »</td></tr>
+<tr><td class="rp">motifs propres et adoptés</td><td>motifs du premier juge repris, validés</td><td>« par motifs propres et adoptés » · « adoptant les motifs des premiers juges »</td></tr>
+<tr><td class="rp">surabondant neutralisé</td><td>la décision tient sur d'autres motifs</td><td>« abstraction faite du motif erroné mais surabondant » · « ces motifs, qui sont surabondants »</td></tr>
+<tr><td class="rp">manque en fait</td><td>le moyen prête à l'arrêt ce qu'il n'a pas dit</td><td>« le moyen manque en fait » · « manque par le fait qui lui sert de base »</td></tr>
+<tr><td class="rp">manque en droit</td><td>le cumul de fondements était possible</td><td>« le moyen manque en droit »</td></tr>
+<tr><td class="rp">proportionnalité</td><td>balance des intérêts validée</td><td>« atteinte [non] disproportionnée » · « juste équilibre »</td></tr>
+</tbody></table>
+</div>
+
+<script>
+document.querySelectorAll('.tb').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on')});
+  document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');document.getElementById('p-'+b.dataset.t).classList.add('on');});});
+</script>
+
+<p class="small" style="margin-top:24px">Fondement doctrinal : Boré &amp; Boré, <i>La cassation en matière civile</i>, Dalloz Action, 6<sup>e</sup> éd.</p>
+</div></body></html>

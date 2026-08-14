@@ -1,0 +1,35 @@
+# Data: collected/derived corpus files, referenced by config.yaml, never committed.
+data/
+
+# baselines/: built train/dev splits and model checkpoints, never committed.
+baselines/data/
+baselines/checkpoints/
+
+# Secrets and local configuration.
+.env
+*.env
+PISTE_API_KEY
+
+# Python.
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+
+# Editors and OS.
+.DS_Store
+.idea/
+.vscode/
+
+# Backups: never commit a .bak file.
+*.bak
+*~
+
+# Jupyter checkpoints.
+.ipynb_checkpoints/
+
+# Finder/iCloud sync-conflict copies ("name 2.ext").
+* 2.*

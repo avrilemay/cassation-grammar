@@ -1,0 +1,241 @@
+[
+ {
+  "pid": "5fca322a9c3644b39432cdd0|1",
+  "pourvoi": "19-17.094",
+  "chambre": "civ1",
+  "annee": 2020,
+  "machine": [
+   "IRREC",
+   "FOND"
+  ],
+  "gold": [
+   "IRREC"
+  ],
+  "strate": "IRREC"
+ },
+ {
+  "pid": "5fca6d0a7e0ae057f1fa44ed|0",
+  "pourvoi": "18-19.100",
+  "chambre": "civ1",
+  "annee": 2019,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "uniforme"
+ },
+ {
+  "pid": "5fca90afd20f5d8407eff46f|0",
+  "pourvoi": "17-17.546",
+  "chambre": "civ1",
+  "annee": 2018,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "uniforme"
+ },
+ {
+  "pid": "5fca953427667189a71bc78b|1",
+  "pourvoi": "16-27.809",
+  "chambre": "comm",
+  "annee": 2018,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "FOND"
+ },
+ {
+  "pid": "5fd8f548b7794d8947c9b17a|0",
+  "pourvoi": "15-26.042",
+  "chambre": "soc",
+  "annee": 2017,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "FOND"
+ },
+ {
+  "pid": "5fd9023a2cdd80992c772ba7|0",
+  "pourvoi": "16-15.561",
+  "chambre": "civ1",
+  "annee": 2017,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "FOND"
+ },
+ {
+  "pid": "5fd9029d3a42b699a629352d|0",
+  "pourvoi": "15-23.533",
+  "chambre": "soc",
+  "annee": 2017,
+  "machine": [
+   "RNSM",
+   "FOND"
+  ],
+  "gold": [
+   "RNSM",
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "FOND"
+ },
+ {
+  "pid": "5fd90586c960029d28d944fc|3",
+  "pourvoi": "15-27.865",
+  "chambre": "comm",
+  "annee": 2017,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "FOND"
+ },
+ {
+  "pid": "5fd90c1956410aa53bb7181b|0",
+  "pourvoi": "15-28.664",
+  "chambre": "civ1",
+  "annee": 2017,
+  "machine": [
+   "IRREC",
+   "FOND"
+  ],
+  "gold": [
+   "FOND"
+  ],
+  "strate": "IRREC"
+ },
+ {
+  "pid": "5fd90cb82495c5a5f6eea44b|0",
+  "pourvoi": "16-13.440",
+  "chambre": "civ2",
+  "annee": 2017,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "RNSM",
+   "FOND"
+  ],
+  "strate": "uniforme"
+ },
+ {
+  "pid": "5fd945f91af87d2d36651319|0",
+  "pourvoi": "15-10.182",
+  "chambre": "civ2",
+  "annee": 2016,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC"
+  ],
+  "strate": "uniforme"
+ },
+ {
+  "pid": "602254e7e6ee9b24d862fda6|0",
+  "pourvoi": "19-12.819",
+  "chambre": "soc",
+  "annee": 2021,
+  "machine": [
+   "RNSM"
+  ],
+  "gold": [
+   "RNSM",
+   "IRREC"
+  ],
+  "strate": "RNSM"
+ },
+ {
+  "pid": "62bbec8e4c169278c0aa917c|0",
+  "pourvoi": "21-11.935",
+  "chambre": "soc",
+  "annee": 2022,
+  "machine": [
+   "RNSM"
+  ],
+  "gold": [
+   "RNSM",
+   "IRREC"
+  ],
+  "strate": "uniforme"
+ },
+ {
+  "pid": "6322ce9f39bd63fcb09450cd|0",
+  "pourvoi": "21-12.897",
+  "chambre": "civ2",
+  "annee": 2022,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "uniforme"
+ },
+ {
+  "pid": "6423d6f078684f04f5813fa5|0",
+  "pourvoi": "22-13.630",
+  "chambre": "civ1",
+  "annee": 2023,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "FOND"
+ },
+ {
+  "pid": "66d805488c253fd3db1c2d81|1",
+  "pourvoi": "23-11.815",
+  "chambre": "soc",
+  "annee": 2024,
+  "machine": [
+   "IRREC",
+   "FOND"
+  ],
+  "gold": [
+   "IRREC"
+  ],
+  "strate": "IRREC"
+ },
+ {
+  "pid": "67eccf6505aee137f36c352d|0",
+  "pourvoi": "23-15.214",
+  "chambre": "comm",
+  "annee": 2025,
+  "machine": [
+   "FOND"
+  ],
+  "gold": [
+   "IRREC",
+   "FOND"
+  ],
+  "strate": "FOND"
+ }
+]

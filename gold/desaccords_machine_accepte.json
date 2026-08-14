@@ -1,0 +1,173 @@
+[
+ {
+  "pid": "5fca698cb04c3b538e958e6d|1",
+  "pourvoi": "18-14.440",
+  "chambre": "soc",
+  "annee": 2019,
+  "machine": "MBL",
+  "gold": "VICE_MOTIFS",
+  "strate": "uniforme"
+ },
+ {
+  "pid": "5fca69ba5dc93453c381e754|1",
+  "pourvoi": "18-17.115",
+  "chambre": "comm",
+  "annee": 2019,
+  "machine": "VIOLATION",
+  "gold": "VICE_FORME",
+  "strate": "uniforme"
+ },
+ {
+  "pid": "5fca760fc561ac6356f03853|0",
+  "pourvoi": "18-10.943",
+  "chambre": "civ2",
+  "annee": 2019,
+  "machine": "VICE_FORME",
+  "gold": "VIOLATION",
+  "strate": "VICE_FORME"
+ },
+ {
+  "pid": "5fca83fa42fee4745b0f5ed9|0",
+  "pourvoi": "17-10.613",
+  "chambre": "soc",
+  "annee": 2018,
+  "machine": "VICE_FORME",
+  "gold": "autre_indetermine",
+  "strate": "VICE_FORME"
+ },
+ {
+  "pid": "5fca8e9547b645815ea8235e|0",
+  "pourvoi": "17-19.343",
+  "chambre": "civ2",
+  "annee": 2018,
+  "machine": "MBL",
+  "gold": "VICE_MOTIFS",
+  "strate": "MBL"
+ },
+ {
+  "pid": "5fca8f3ada8c4e8248248f4a|1",
+  "pourvoi": "17-10.230",
+  "chambre": "soc",
+  "annee": 2018,
+  "machine": "EXCES_OFFICE",
+  "gold": "VIOLATION",
+  "strate": "uniforme"
+ },
+ {
+  "pid": "5fcaa2fe71e2bb99b37045d5|1",
+  "pourvoi": "16-14.235",
+  "chambre": "soc",
+  "annee": 2017,
+  "machine": "EXCES_OFFICE",
+  "gold": "MBL",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "5fd8f842ea27e38ce52c4933|0",
+  "pourvoi": "15-24.296",
+  "chambre": "soc",
+  "annee": 2017,
+  "machine": "VIOLATION",
+  "gold": "MBL",
+  "strate": "uniforme"
+ },
+ {
+  "pid": "5fd8fde884e46393e7a3e116|2",
+  "pourvoi": "16-12.567",
+  "chambre": "soc",
+  "annee": 2017,
+  "machine": "EXCES_OFFICE",
+  "gold": "VIOLATION",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "5fd9032c9a82129a57579c0a|2",
+  "pourvoi": "15-19.300",
+  "chambre": "soc",
+  "annee": 2017,
+  "machine": "EXCES_OFFICE",
+  "gold": "VIOLATION",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "5fd90551f2f9c99cea5292bd|3",
+  "pourvoi": "15-24.822",
+  "chambre": "soc",
+  "annee": 2017,
+  "machine": "EXCES_OFFICE",
+  "gold": "VIOLATION",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "5fd913265bd574adbbcfa7f5|2",
+  "pourvoi": "15-27.436",
+  "chambre": "soc",
+  "annee": 2016,
+  "machine": "EXCES_OFFICE",
+  "gold": "VIOLATION",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "63d0dc3893de8405dea5323c|2",
+  "pourvoi": "21-13.375",
+  "chambre": "soc",
+  "annee": 2023,
+  "machine": "VIOLATION",
+  "gold": "VICE_FORME",
+  "strate": "VIOLATION"
+ },
+ {
+  "pid": "63e49d5d5a87f705dec49a15|0",
+  "pourvoi": "20-17.143",
+  "chambre": "civ2",
+  "annee": 2023,
+  "machine": "EXCES_OFFICE",
+  "gold": "VIOLATION",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "63ec8cc29dfdee05deff080c|1",
+  "pourvoi": "19-25.824",
+  "chambre": "comm",
+  "annee": 2023,
+  "machine": "VICE_FORME",
+  "gold": "VIOLATION",
+  "strate": "VICE_FORME"
+ },
+ {
+  "pid": "6530d9762733048318aefedb|1",
+  "pourvoi": "22-11.513",
+  "chambre": "civ3",
+  "annee": 2023,
+  "machine": "EXCES_OFFICE",
+  "gold": "OMISSION_ULTRA_PETITA",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "65fbed41affbff00080c6ca9|0",
+  "pourvoi": "22-22.004",
+  "chambre": "civ1",
+  "annee": 2024,
+  "machine": "VICE_FORME",
+  "gold": "VIOLATION",
+  "strate": "uniforme"
+ },
+ {
+  "pid": "6710a934be64d7e510244cd0|2",
+  "pourvoi": "21-25.488",
+  "chambre": "civ2",
+  "annee": 2024,
+  "machine": "VIOLATION",
+  "gold": "MBL",
+  "strate": "VIOLATION"
+ },
+ {
+  "pid": "67ac54f491acc6fabdb2ced1|3",
+  "pourvoi": "23-10.813",
+  "chambre": "comm",
+  "annee": 2025,
+  "machine": "MBL",
+  "gold": "VICE_MOTIFS",
+  "strate": "MBL"
+ }
+]

@@ -1,0 +1,10 @@
+# Only lower bounds are pinned; no upper bound and no lock file. Versions verified to
+# reproduce the reference corpus at 0-diff (full chain, byte-identical output): pandas
+# 3.0.5, numpy 2.5.1, pyarrow 25.0.0, requests 2.34.2, tqdm 4.70.0, PyYAML 6.0.3,
+# on Python 3.13.13.
+pandas>=2.0
+numpy>=1.24
+pyarrow>=14.0
+requests>=2.31
+tqdm>=4.66
+PyYAML>=6.0

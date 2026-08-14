@@ -1,0 +1,102 @@
+# Single configuration file for the cassation-grammar pipeline: every input/output path and
+# parameter. Every script reads it through pipeline/_config.py. Paths are relative to the
+# repository root unless already absolute. Large corpus files (pickles, jsonl, parquet) are
+# not shipped here. Point `data:` at wherever you keep them once downloaded from Zenodo.
+
+# --- Step 1: collection (pipeline/01_collect.py) ---
+collect:
+  # Production PISTE endpoint, required for the full fund (548,126 decisions, see
+  # the datasheet on the Zenodo record). The sandbox endpoint only serves a restricted test subset.
+  # Production access is a separate PISTE approval, request at https://piste.gouv.fr/.
+  api_base_url: "https://api.piste.gouv.fr/cassation/judilibre/v1.0/export"
+  # Environment variable holding the PISTE API key. Never put the key itself in this file.
+  api_key_env: PISTE_API_KEY
+  jurisdiction: cc
+  window_days: 5
+  batch_size: 1000
+  date_min: "1790-01-01"
+  max_consecutive_empty_windows: 100
+
+# --- Data files, in and out. Every step reads/writes only paths listed here. ---
+data:
+  # One JSON file per decision, written by 01_collect.py, or point it at an existing local
+  # Judilibre dump to skip that step (alternate entry point).
+  raw_decisions_dir: data/raw/ccass
+  # Pickles written by 01_collect.py, and clean_pickle is read by 02_zone_and_pair.py.
+  raw_pickle: data/df_ccass_raw.pkl.gz
+  clean_pickle: data/df_ccass_clean.pkl.gz
+
+  # Written by 02_zone_and_pair.py, read by 03_classify.py.
+  pairs_appariement: data/pairs_appariement.jsonl
+
+  # Written by 03_classify.py, read by 04_articles.py.
+  pairs_classified: data/pairs_classified.jsonl
+
+  # Written by 04_articles.py.
+  article_long_parquet: data/article_long.parquet
+  article_long_csv: data/article_long.csv
+  article_long_enriched: data/article_long_enriched.parquet
+  moyens_sans_article: data/moyens_sans_article.parquet
+  moyens_sans_article_summary: data/moyens_sans_article_summary.json
+  corpus_overview: data/corpus_overview.json
+  real_moyens_pids: data/real_moyens_pids.parquet
+
+# --- Step 2: zoning and pairing of ground and grounds-text (pipeline/02_zone_and_pair.py) ---
+pairing:
+  chambers: [civ1, civ2, civ3, comm, soc]
+  year_min: 2016
+  year_max: 2025
+  solutions: [cassation, rejet]
+  # Human-reviewed reference file: decisions dropped from the pool (non-pourvoi petitions or
+  # appeals, stay-of-execution rulings) plus a correction of the cassation type for a few
+  # ambiguous decisions. See load_excluded_arrets in pipeline/02_zone_and_pair.py.
+  excluded_arrets_json: pipeline/reference/excluded_arrets.json
+
+# --- Step 3: classification, cascade + grid + hors_moyen rule (pipeline/03_classify.py) ---
+classify:
+  grille_json: grids/grille.json
+  detectors_dir: grids
+
+# --- Step 4: article-level layer (pipeline/04_articles.py) ---
+articles:
+  code_civil_json: pipeline/reference/code_civil_complet.json
+  # Bare (uncoded) article numbers inherit "code civil" only above this threshold. See
+  # article_extraction.py::extract_article_refs for the justification.
+  promotion_min_number: 100
+
+# --- baselines/: classifier baselines reported in the paper ---
+baselines:
+  dataset: data/cassation_pairs_2016_2025_v1.1.jsonl
+  # Every pid listed here is excluded from the training data build_training_data.py builds.
+  gold_accepte: gold/gold_accepte.jsonl
+  gold_rejete: gold/gold_rejete.jsonl
+  # Where build_training_data.py writes the train/dev splits, the joined gold-eval files,
+  # and the manifest. Where train.py reads them from.
+  out_dir: baselines/data
+  checkpoints_dir: baselines/checkpoints
+  # Motivations shorter than this are dropped as too little text to carry a label.
+  min_chars: 50
+  # Per rejection-signature cap on the rejected side (without a cap, the RNSM-only
+  # signature alone would dwarf every other one).
+  cap_per_signature: 8000
+  seed: 20260729
+  # --model argument of train.py resolves through this table.
+  models:
+    juribert: dascim/juribert-base
+    camembertv2: almanach/camembertv2-base
+
+  # llm_zero_shot.py: zero-shot LLM baseline on the same gold set and metric as the two
+  # fine-tuned baselines above. Reuses dataset, gold_accepte, gold_rejete. Canonical prompt
+  # in baselines/PROMPT_zero_shot.md.
+  llm_zero_shot:
+    prompt_file: baselines/PROMPT_zero_shot.md
+    # Never committed (baselines/data/ is gitignored).
+    out_dir: baselines/data/llm_zero_shot
+    # Env var names read at call time, values never in this file. Lets the same script
+    # target a local vLLM server or a commercial API by changing only the environment.
+    base_url_env: LLM_BASE_URL
+    api_key_env: LLM_API_KEY
+    model_env: LLM_MODEL
+    temperature: 0.0
+    max_retries: 1
+    request_timeout: 120

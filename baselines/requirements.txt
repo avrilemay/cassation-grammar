@@ -1,0 +1,4 @@
+# Additional dependencies for baselines/, on top of the root requirements.txt
+# (numpy, PyYAML). Verified with torch 2.12.1, transformers 5.12.1 on Python 3.13.
+torch>=2.0
+transformers>=4.40

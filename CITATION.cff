@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: If you use this dataset or this code, please cite the paper below.
+title: A Grammar of French Civil Cassation
+type: dataset
+authors:
+  - family-names: Floro
+    given-names: Avrile
+    email: floro.avrile@gmail.com
+  - family-names: Dhorasoo
+    given-names: Tamara
+  - family-names: Holzenberger
+    given-names: Nils
+  - family-names: Le Goff
+    given-names: Thomas
+  - family-names: Viard
+    given-names: Tiphaine
+  - family-names: Boritchev
+    given-names: Maria
+preferred-citation:
+  type: generic
+  title: "A Grammar of French Civil Cassation: A Ground-Level Dataset and Tool"
+  authors:
+    - family-names: Floro
+      given-names: Avrile
+    - family-names: Dhorasoo
+      given-names: Tamara
+    - family-names: Holzenberger
+      given-names: Nils
+    - family-names: Le Goff
+      given-names: Thomas
+    - family-names: Viard
+      given-names: Tiphaine
+    - family-names: Boritchev
+      given-names: Maria
+  year: 2026
+  notes: Under review

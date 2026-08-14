@@ -1,0 +1,72 @@
+[
+ {
+  "pid": "5fca698eb04c3b538e958e87|0",
+  "pourvoi": "18-11.159",
+  "chambre": "soc",
+  "annee": 2019,
+  "annotator_a": "autre_indetermine",
+  "annotator_b": "DENATURATION",
+  "final": "DENATURATION",
+  "strate": "DENATURATION"
+ },
+ {
+  "pid": "5fca698cb04c3b538e958e6d|1",
+  "pourvoi": "18-14.440",
+  "chambre": "soc",
+  "annee": 2019,
+  "annotator_a": "VIOLATION",
+  "annotator_b": "VICE_MOTIFS",
+  "final": "VICE_MOTIFS",
+  "strate": "uniforme"
+ },
+ {
+  "pid": "600fdd18710da20cddd31446|1",
+  "pourvoi": "19-17.346",
+  "chambre": "soc",
+  "annee": 2021,
+  "annotator_a": "VIOLATION",
+  "annotator_b": "autre_indetermine",
+  "final": "VIOLATION",
+  "strate": "uniforme"
+ },
+ {
+  "pid": "6388530f01d0fb05d44b09c4|0",
+  "pourvoi": "21-14.233",
+  "chambre": "civ2",
+  "annee": 2022,
+  "annotator_a": "MBL",
+  "annotator_b": "VICE_FORME",
+  "final": "VICE_FORME",
+  "strate": "VICE_FORME"
+ },
+ {
+  "pid": "6350f58efad421adffeefcc4|1",
+  "pourvoi": "21-17.375",
+  "chambre": "civ2",
+  "annee": 2022,
+  "annotator_a": "VIOLATION",
+  "annotator_b": "VICE_FORME",
+  "final": "VICE_FORME",
+  "strate": "VICE_FORME"
+ },
+ {
+  "pid": "6530d9762733048318aefedb|1",
+  "pourvoi": "22-11.513",
+  "chambre": "civ3",
+  "annee": 2023,
+  "annotator_a": "EXCES_OFFICE",
+  "annotator_b": "OMISSION_ULTRA_PETITA",
+  "final": "OMISSION_ULTRA_PETITA",
+  "strate": "EXCES_OFFICE"
+ },
+ {
+  "pid": "65fbed41affbff00080c6ca9|0",
+  "pourvoi": "22-22.004",
+  "chambre": "civ1",
+  "annee": 2024,
+  "annotator_a": "VIOLATION",
+  "annotator_b": "VICE_FORME",
+  "final": "VIOLATION",
+  "strate": "uniforme"
+ }
+]

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide d'annotation : familles ACCEPTÉ (cas d'ouverture)</title><style>
+  :root{--paper:#f4f1e9;--card:#fffdf8;--ink:#211e1c;--muted:#6c6862;--line:#e0d9cc;
+    --accent:#8c2b2b;--accent-soft:#f4e7e5;--ok:#2f6b46;--warn:#9a6a1e;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:ui-sans-serif,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.6}
+  .wrap{max-width:960px;margin:0 auto;padding:34px 24px 80px}
+  h1{font-size:29px;margin:0 0 4px}h1 b{color:var(--accent)}
+  .sub{font-family:var(--sans);font-size:13px;color:var(--muted);margin-bottom:8px}
+  .src{font-family:var(--sans);font-size:12.5px;color:var(--muted);border-left:3px solid var(--accent);padding:8px 12px;background:var(--card);border-radius:0 8px 8px 0;margin:16px 0 26px}
+  h2{font-family:var(--sans);font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:34px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent)}
+  p,li{font-size:15.5px}
+  table{width:100%;border-collapse:collapse;margin:10px 0 6px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-family:var(--sans);font-size:13.5px}
+  th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--accent-soft);color:#5a1c1c;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  tr:last-child td{border-bottom:none}
+  code,.fx{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#efe9dd;padding:1px 5px;border-radius:4px;color:#5a1c1c}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:12px 0}
+  .box.warn{border-left:4px solid var(--warn)}.box.key{border-left:4px solid var(--accent);background:#fbf6ee}
+  .lbl{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  mark{background:#ffe66b;padding:0 3px;border-radius:2px}
+  .small{font-size:13px;color:var(--muted);font-family:var(--sans)}
+  .art{font-weight:700;color:var(--accent);white-space:nowrap}
+  ol.casc{font-family:var(--sans);font-size:14px;margin:10px 0;padding-left:30px}
+  ol.casc li{margin:5px 0}ol.casc li b{color:#5a1c1c}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}
+  details[open]{box-shadow:0 2px 8px rgba(60,40,20,.08)}
+  summary{cursor:pointer;padding:13px 16px;font-family:var(--sans);font-weight:700;font-size:15.5px;color:#5a1c1c;background:var(--accent-soft);user-select:none;list-style:none;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  summary::before{content:"▸";transition:transform .15s}
+  details[open] summary::before{content:"▾"}
+  summary .def{font-family:var(--serif);font-weight:400;font-size:14px;color:var(--muted);font-style:italic}
+  .inner{padding:6px 16px 16px}
+  details.sf{margin:8px 0;border-color:#e7dfd0}
+  details.sf summary{background:#f7f2e8;font-size:14px;color:#3c3833}
+  .ex{border-left:3px solid var(--ok);background:#f4f8f4;border-radius:0 8px 8px 0;padding:8px 12px;margin:8px 0}
+  .ex .exm{font-family:var(--sans);font-size:11.5px;font-weight:700;color:var(--ok);margin-bottom:3px}
+  .ex .ext{font-size:14px;line-height:1.5;font-style:italic;color:#2c3a2e}
+  .exh{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ok);margin:10px 0 2px}
+
+  details.exd,details.warnd{background:transparent;border:1px dashed var(--line);border-radius:8px;margin:8px 0;box-shadow:none}
+  details.exd summary{background:#eef5ee;color:#2f6b46;font-size:12.5px;padding:8px 12px}
+  details.warnd summary{background:#faf3e2;color:#8a6a1f;font-size:12.5px;padding:8px 12px}
+  details.exd .inner,details.warnd .inner{padding:4px 12px 10px}
+
+  .tabs{position:sticky;top:0;background:var(--paper);padding:10px 0 8px;display:flex;gap:8px;z-index:5;border-bottom:2px solid var(--accent);margin-bottom:6px}
+  .tb{font-family:var(--sans);font-size:13.5px;font-weight:700;color:#5a1c1c;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 16px;cursor:pointer}
+  .tb.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .pane{display:none}.pane.on{display:block}
+  .exs{font-style:italic;color:#2c3a2e;font-size:13px}
+  .memo p{margin:6px 0}
+  .memo .fam{margin:14px 0 4px;font-family:var(--sans);font-weight:700;font-size:15px;color:#5a1c1c}
+  .memo li{margin:7px 0;font-size:14.5px}
+
+  table.lean{font-size:13px}
+  table.lean td{padding:7px 10px}
+  table.lean tr.famh td{background:var(--accent-soft);font-weight:800;font-size:13px;color:#3c3833;letter-spacing:.03em}
+  table.lean td.rp{font-weight:700;white-space:nowrap}
+  table.lean td.ex{font-style:italic;color:#2c3a2e}
+
+  .famt{margin:20px 0 6px;font-family:var(--sans);font-weight:800;font-size:15.5px;color:#3c3833;border-bottom:2px solid var(--line);padding-bottom:4px}
+  .famt .fd{font-weight:400;font-size:13px;color:var(--muted)}
+</style></head><body><div class="wrap">
+
+<h1>Guide d'annotation : <b>familles ACCEPTÉ</b> (cas d'ouverture à cassation)</h1>
+<div class="sub">Campagne multi-annotateurs · unité = le <b>moyen</b> (une paire moyen ↔ réponse de la Cour) · Cour de cassation, chambres civiles (civ1, civ2, civ3, comm, soc), 2016-2025</div>
+<div class="src">Fondement doctrinal : Boré &amp; Boré, <i>La cassation en matière civile</i>, Dalloz Action, 6<sup>e</sup> éd. 2023-2024.</div>
+
+<div class="tabs"><button class="tb on" data-t="guide">Guide</button><button class="tb" data-t="memo">Aide-mémoire</button></div>
+<div class="pane on" id="p-guide">
+<h2>1 · Ce qu'on annote et où le lire</h2>
+<p>Un pourvoi en cassation attaque un arrêt de cour d'appel. Quand la Cour de cassation casse, elle censure l'arrêt pour un motif de droit déterminé, appelé <b>cas d'ouverture à cassation</b>. C'est la catégorie doctrinale du grief que la Cour retient contre l'arrêt attaqué : violation de la loi, manque de base légale, défaut de motivation, dénaturation, entre autres. On annote ce cas d'ouverture au niveau de la <b>famille</b>, et d'elle seule. Les sous-familles présentées dans ce guide ne sont pas à annoter. Ce sont des <b>repères</b> : elles énumèrent les formes que prend une famille, ce qui aide à la reconnaître.</p>
+<div class="box key"><span class="lbl">Où lire : la zone-verdict</span><br>
+On lit le cas d'ouverture dans la <b>réponse de la Cour</b>, jamais dans le résumé du moyen, qui est la voix du demandeur. Le segment décisif s'ouvre par <mark>« En statuant ainsi »</mark> / « Qu'en statuant ainsi » / « en se déterminant ainsi », et se referme sur la <b>formule terminale de cassation</b> (<mark>« a violé »</mark>, « n'a pas donné de base légale »). Le <b>visa</b> (« Vu <span class="art">l'article…</span> ») annonce le texte en jeu. Les articles sont des indices, voir le récapitulatif du §6.</div>
+<div class="box warn"><span class="lbl">À ignorer : la fin de l'arrêt (« Portée et conséquences »)</span><br>
+Après la réponse aux moyens, l'arrêt comporte souvent des sections « Portée et conséquences de la cassation », « Mise hors de cause », « Sur les dépens », ou, en rédaction ancienne, un paragraphe « Et attendu que la cassation entraîne… ». Ces passages décrivent les suites de l'arrêt de cassation dans son ensemble : quels chefs tombent par ricochet, qui supporte les dépens. Ils ne disent rien du cas d'ouverture du moyen affiché. <b>On n'en tient aucun compte.</b> Une formule qui s'y trouve (« la cassation entraîne, par voie de conséquence… ») ne fonde jamais une annotation.</div>
+<details class="warnd"><summary>⚠ Les deux voix</summary><div class="inner">« le moyen fait grief à l'arrêt d'avoir <i>violé</i>… » est la voix du pourvoi. Elle ne compte pas. Seule compte la réponse de la Cour. Un « a violé » dans le résumé du grief n'est pas un verdict.</div></details>
+
+<h2>2 · Formules terminales : « a violé » est la clôture par défaut</h2>
+<p style="margin:6px 0"><b>« a violé le texte susvisé » n'est pas un marqueur de famille</b> : c'est la clôture générique de beaucoup de cassations, toutes familles confondues (le contradictoire, l'excès d'office, la résistance se ferment aussi par « a violé »).</p><ul style="margin:4px 0 8px 18px;padding:0"><li><b>La règle</b> : descendre la cascade (1 à 8) et retenir le premier indicateur précis rencontré (ultra petita, saisine / office, forme / contradictoire, contrariété, motivation / 455, dénaturation, carence MBL).</li><li><b>VIOLATION seulement si rien de plus précis</b> : c'est la famille par défaut, testée en dernier.</li><li><b>Les clôtures spécifiques restent décisives</b> : « base légale » → MBL · « exigences / 455 » → VICE_MOTIFS · « a dénaturé » → DENATURATION.</li><li><b>Cas emblématique</b> : « sans rechercher / caractériser » → MBL même si la clôture est « a violé ».</li></ul>
+<table><tbody><tr><th>Formule terminale</th><th>Famille</th></tr>
+<tr><td>« en omettant de statuer » · « a statué sur chose non demandée »</td><td>OMISSION_ULTRA_PETITA</td></tr>
+<tr><td>« a méconnu l'étendue de sa saisine / ses pouvoirs / son office » · « a excédé ses pouvoirs »</td><td>EXCES_OFFICE</td></tr>
+<tr><td>« n'a pas répondu aux conclusions » · « n'a pas satisfait aux exigences de <span class="art">l'art. 455</span> »</td><td>VICE_MOTIFS</td></tr>
+<tr><td>« a dénaturé [l'écrit / les termes clairs et précis de…] »</td><td>DENATURATION</td></tr>
+<tr><td>« n'a pas donné de base légale à sa décision » · « privé sa décision de base légale »</td><td>MBL</td></tr>
+<tr><td>« a violé le texte / l'article susvisé » (clôture générique : VIOLATION seulement si aucun indicateur plus précis)</td><td>VIOLATION</td></tr>
+</tbody></table>
+<p class="small">Un mot descriptif isolé (« sans rechercher », « contradiction », « omission », « inconciliable ») n'impose pas la famille qui lui ressemble : voir les faux amis (§5).</p>
+
+<h2>3 · La cascade : ordre de priorité entre familles</h2>
+<p>Quand une motivation porte plusieurs signaux, on applique un ordre de priorité fixe. On descend la liste et la <b>première famille dont un signal est présent l'emporte</b>. Les familles spécifiques et rares passent d'abord. VIOLATION, générique, passe en dernier, à titre résiduel.</p>
+<ol class="casc">
+<li><b>OMISSION_ULTRA_PETITA</b> : l'arrêt attaqué omet de statuer, ou statue au-delà de la demande</li>
+<li><b>EXCES_OFFICE</b> : incompétence · perte de fondement juridique · excès de pouvoir / saisine</li>
+<li><b>VICE_FORME</b> : irrégularité formelle de la décision · atteinte au contradictoire (<span class="art">art. 14 et 16 CPC</span>)</li>
+<li><b>CONTRARIETE_JUGEMENTS</b> : décisions inconciliables (<span class="art">art. 618</span>) <span class="small">(conservée pour complétude)</span></li>
+<li><b>VICE_MOTIFS</b> : défaut de réponse · contradictions de motifs · motifs dubitatifs · défaut de motifs</li>
+<li><b>DENATURATION</b> : un écrit clair et précis reçoit un sens contraire à ses termes</li>
+<li><b>MBL</b> : manque de base légale (motifs inopérants · impropres · recherche omise · MBL pur)</li>
+<li><b>VIOLATION</b> : violation de la loi, en dernier (famille par défaut du « a violé » nu)</li>
+</ol>
+<p class="small">Un moyen propre = une formule terminale = pas d'ambiguïté. La cascade ne sert que si un même moyen cumule réellement deux qualifications.</p>
+
+<h2>4 · Les familles : définitions, repères, formulations, exemples</h2>
+<p class="small">Dans l'ordre de la cascade. Cliquer pour déplier.</p>
+
+<details><summary>1 · OMISSION_ULTRA_PETITA<span class="def">l'arrêt attaqué a omis de juger une demande, ou a jugé plus que demandé</span></summary><div class="inner">
+<p><b>Définition :</b> le juge d'appel doit répondre à toutes les demandes, et seulement à elles. S'il en omet une (infra petita) ou s'il accorde ce qui n'était pas demandé (ultra petita), l'arrêt est cassé. Articles clés : <span class="art">art. 4 et 5 CPC</span> (le juge doit se prononcer sur tout ce qui est demandé, et seulement sur ce qui est demandé), <span class="art">art. 463</span> (procédure de complément, faux ami, §5).</p>
+<p><b>Formulations clés :</b> <span class="fx">« en omettant de statuer sur… »</span> · <span class="fx">« a statué sur chose non demandée »</span> · <span class="fx">« a méconnu les termes du litige en accordant plus qu'il n'était demandé »</span></p>
+<details class="warnd" open><summary>⚠ Ne pas confondre</summary><div class="inner">« omission de statuer » comme thème de l'affaire (la CA a mal appliqué la procédure de l'<span class="art">art. 463</span>) + « a violé » → <b>VIOLATION</b>. OMISSION_ULTRA_PETITA seulement si l'arrêt attaqué omet lui-même de statuer.</div></details>
+</div></details>
+
+<details><summary>2 · EXCES_OFFICE<span class="def">le juge est sorti de son rôle : il a fait plus (ou moins) que ce que son office permet</span></summary><div class="inner">
+<p><b>Définition :</b> l'office du juge est délimité par les demandes dont il est saisi et par les pouvoirs que la loi lui donne. Cette famille sanctionne le juge qui sort de ces limites : il modifie l'objet du litige, statue sans en avoir le pouvoir, ou refuse de statuer sur ce dont il était saisi. Elle couvre aussi la décision qui perd son fondement parce que le texte ou la décision qui la portait a disparu. Article clé : <span class="art">art. 4 CPC</span> (objet du litige).</p>
+<table><tbody><tr><th>Repère</th><th>Ce que ça recouvre</th><th>Formulations clés</th></tr>
+<tr><td><b>INCOMPETENCE</b></td><td>La juridiction n'était pas compétente pour statuer. Très rare.</td><td>« incompétent pour connaître de… »</td></tr>
+<tr><td><b>PERTE_FONDEMENT</b></td><td>L'arrêt est privé de fondement juridique : le texte ou la décision-support a été annulé ou abrogé.</td><td>« privé de fondement juridique », « la décision-support a été annulée »</td></tr>
+<tr><td><b>EXCES_POUVOIR</b></td><td>Dépassement ou méconnaissance de l'office ou de la saisine : modification de l'objet du litige, refus de statuer sur une demande dont la CA était saisie.</td><td>« a méconnu l'étendue de sa saisine / de ses pouvoirs », « a modifié l'objet du litige », « a excédé ses pouvoirs », « il lui appartenait de statuer sur… »</td></tr>
+</tbody></table>
+<p><b>Formules les plus fréquentes du corpus :</b> <span class="fx">« a modifié l'objet du litige »</span> · <span class="fx">« a excédé ses pouvoirs »</span> · <span class="fx">« a méconnu les termes du litige »</span> · <span class="fx">« a méconnu l'objet du litige »</span> · <span class="fx">« le juge ne statue que sur les prétentions… »</span> (chapeau, <span class="art">art. 4-5 CPC</span>) · <span class="fx">« a méconnu l'étendue de ses pouvoirs »</span></p>
+<details class="warnd"><summary>⚠ À retenir</summary><div class="inner">Dès que la formule terminale dit « a méconnu l'étendue de sa saisine / de ses pouvoirs / son office », c'est <b>EXCES_POUVOIR</b>, même si « a violé » suit. Ne pas lire en VIOLATION.<br><br><span class="lbl">Perte de fondement ≠ voie de conséquence</span><br>« la cassation entraîne par voie de conséquence celle de… » (<span class="art">art. 624/625</span>) est un effet procédural, pas un cas d'ouverture. Ces moyens ont un statut à part et ne font pas partie du lot à annoter. Si un tel passage apparaît seul dans le texte affiché, choisir « Autre / Indéterminé » (touche 9) avec une note, jamais PERTE_FONDEMENT.</div></details>
+</div></details>
+
+<details><summary>3 · VICE_FORME<span class="def">la décision est irrégulière dans sa forme, ou le juge a surpris les parties</span></summary><div class="inner">
+<p><b>Définition :</b> cette famille couvre deux cas distincts. (a) La décision ne respecte pas les règles de forme : mentions obligatoires, signatures, composition de la formation. (b) Le juge a tranché sur un argument sans laisser les parties en discuter, ce qui porte atteinte au principe de la contradiction.</p>
+<table><tbody><tr><th>Repère</th><th>Ce que ça recouvre</th><th>Formulations clés · articles</th></tr>
+<tr><td><b>VICE_FORME</b></td><td>Irrégularité formelle de la décision : mentions, signatures, composition.</td><td>« n'a pas satisfait aux exigences [de forme] » · visa <span class="art">art. 447, 454, 456, 458 CPC</span></td></tr>
+<tr><td><b>VIOL_PROC_CONTRADICTOIRE</b></td><td>Atteinte au contradictoire : moyen relevé d'office sans inviter les parties à s'expliquer.</td><td>« sans inviter les parties à présenter leurs observations », « relevé d'office sans… » · « nulle partie ne peut être jugée sans avoir été entendue ou appelée » · visa <span class="art">art. 14 ou 16 CPC</span></td></tr>
+</tbody></table>
+<p><b>Formules les plus fréquentes du corpus :</b> <span class="fx">« principe de la contradiction »</span> · <span class="fx">« sans inviter les parties à présenter leurs observations »</span> · <span class="fx">« relevé d'office… sans avoir au préalable invité les parties… »</span> · <span class="fx">« droits de la défense »</span></p>
+<details class="warnd"><summary>⚠ Faux ami « article 16 »</summary><div class="inner"><span class="art">art. 16 du CPC</span> → contradictoire → cette famille, tout comme <span class="art">l'art. 14 CPC</span> (« nulle partie ne peut être jugée sans avoir été entendue ou appelée »). <span class="art">art. 16 du décret 91-1197</span> (profession d'avocat) = texte de fond homonyme → si « a violé », c'est <b>VIOLATION</b>.</div></details>
+</div></details>
+
+<details><summary>4 · CONTRARIETE_JUGEMENTS <span class="def">deux décisions définitives inconciliables, conservée pour complétude</span></summary><div class="inner">
+<p><b>Définition :</b> deux décisions passées en force de chose jugée disent des choses incompatibles. La seconde est cassée. Visa <span class="art">art. 618 CPC</span>. La catégorie est conservée pour complétude. Devant un cas apparent, vérifier le visa <span class="art">618</span>, sinon il s'agit du faux ami « inconciliable » (§5).</p>
+</div></details>
+
+<details><summary>5 · VICE_MOTIFS<span class="def">le raisonnement écrit de l'arrêt est défectueux : réponse manquante, contradiction, doute, silence</span></summary><div class="inner">
+<p><b>Définition :</b> tout jugement doit être motivé (<span class="art">art. 455 CPC</span>, l'article signature de cette famille). Le défaut porte ici sur la motivation elle-même, pas sur le fond du droit : l'arrêt ne répond pas à un argument, se contredit, doute, ou ne motive pas.</p>
+<table><tbody><tr><th>Repère</th><th>Ce que ça recouvre</th><th>Formulations clés</th></tr>
+<tr><td><b>DEFAUT_REPONSE</b></td><td>Un moyen identifié d'une partie reste sans réponse, alors que des motifs existent par ailleurs.</td><td>« sans répondre aux conclusions… », « n'a pas répondu au moyen tiré de… »</td></tr>
+<tr><td><b>MOTIFS_DISP_CONTRADICTION</b></td><td>Contradiction entre les motifs et le dispositif.</td><td>« contradiction entre les motifs et le dispositif »</td></tr>
+<tr><td><b>MOTIFS_CONTRADICTOIRES</b></td><td>Les motifs se contredisent entre eux.</td><td>« contradiction de motifs », « motifs inconciliables entre eux »</td></tr>
+<tr><td><b>MOTIFS_DUBITATIFS</b></td><td>Le juge s'exprime par supposition et ne tranche pas. Critère = l'incertitude énonciative (conditionnel, « il semble que »).</td><td>« motifs dubitatifs ou hypothétiques »</td></tr>
+<tr><td><b>DEFAUT_MOTIFS</b></td><td>Absence de motifs, ou motifs purement formels comme la recopie de la requête.</td><td>« sans énoncer de motif », « se borne à rappeler les termes de la requête »</td></tr>
+</tbody></table>
+<p><b>Formules les plus fréquentes du corpus :</b> <span class="fx">« sans répondre aux conclusions »</span> · <span class="fx">« défaut de réponse aux conclusions »</span> · <span class="fx">« n'a pas satisfait aux exigences du texte susvisé »</span> (la clôture-type, visa <span class="art">455</span>) · <span class="fx">« contradiction entre les motifs et le dispositif »</span> · <span class="fx">« le défaut de réponse à conclusions constitue un défaut de motifs »</span> (chapeau récurrent)</p>
+<details class="warnd"><summary>⚠ « motifs généraux »</summary><div class="inner">« par des motifs généraux » = insuffisance de caractérisation → famille <b>MBL</b>, et non VICE_MOTIFS. La généralité n'est pas le doute.</div></details>
+</div></details>
+
+<details><summary>6 · DENATURATION<span class="def">le juge a fait dire à un écrit clair le contraire de ce qu'il dit</span></summary><div class="inner">
+<p><b>Définition :</b> un contrat, un testament, des conclusions peuvent avoir un sens clair et précis. Le juge du fond est souverain pour interpréter ce qui est ambigu. S'il donne à un écrit clair un sens contraire à ses termes, la Cour casse. Fondement : <span class="art">art. 1192 c. civ.</span> (ancien 1134) et l'« obligation pour le juge de ne pas dénaturer l'écrit qui lui est soumis ».</p>
+<p><b>Formulations clés :</b> <span class="fx">« a dénaturé les termes clairs et précis de… »</span> · <span class="fx">« en dénaturant [l'acte / les conclusions] »</span> · <span class="fx">« dénaturation des conclusions / du contrat »</span> · visa <span class="fx">« Vu l'obligation pour le juge de ne pas dénaturer… »</span></p>
+<details class="warnd"><summary>⚠ Sens inverse</summary><div class="inner">« sans dénaturation », « sans dénaturer » = la Cour approuve le juge du fond. C'est un marqueur de <b>rejet</b>, pas de cassation. Devant « sans dénaturer… a légalement justifié sa décision », le moyen est rejeté.</div></details>
+</div></details>
+
+<details><summary>7 · MBL<span class="def">l'arrêt n'établit pas assez les faits pour qu'on puisse vérifier qu'il applique bien la loi</span></summary><div class="inner">
+<p><b>Définition :</b> le manque de base légale ne dit pas que la décision est fausse. Il dit qu'elle est invérifiable : les faits constatés ne suffisent pas à contrôler que la règle de droit a été bien appliquée. Le cas typique est celui du juge qui a omis de rechercher un fait déterminant. Verdict signature : <span class="fx">« n'a pas donné de base légale à sa décision »</span> / <span class="fx">« a privé sa décision de base légale »</span>.</p>
+<table><tbody><tr><th>Repère</th><th>Ce que ça recouvre</th><th>Formulations clés</th></tr>
+<tr><td><b>MOTIFS_INOPERANTS</b></td><td>Les motifs retenus sont juridiquement sans portée sur la solution.</td><td>« par des motifs inopérants »</td></tr>
+<tr><td><b>MOTIFS_IMPROPRES</b></td><td>Motifs impropres ou insuffisants à caractériser une condition légale précise.</td><td>« par des motifs impropres à caractériser… », « ne suffisent pas à caractériser », « motifs généraux »</td></tr>
+<tr><td><b>MBL_INVESTIGATION</b></td><td>Une recherche factuelle déterminée a été omise. Le marqueur est la locution d'omission. Vaut même si la formule terminale est « a violé ».</td><td>« sans rechercher si… », « sans constater que… », « sans caractériser… », « sans s'expliquer sur… », « il lui appartenait de rechercher / de vérifier… »</td></tr>
+<tr><td><b>MBL_PUR</b></td><td>« pas de base légale » nu, sans recherche nommée ni qualificatif des motifs.</td><td>« n'a pas donné de base légale » (nu), « ne met pas la Cour en mesure d'exercer son contrôle », « s'est bornée à… »</td></tr>
+</tbody></table>
+<p><b>Formules les plus fréquentes du corpus :</b> <span class="fx">« n'a pas donné de base légale à sa décision »</span> · <span class="fx">« sans rechercher, comme il le lui était demandé, si… »</span> · <span class="fx">« privé sa décision de base légale »</span> · <span class="fx">« par des motifs impropres à… »</span> · <span class="fx">« par des motifs inopérants »</span> · <span class="fx">« sans constater que… »</span> · <span class="fx">« En se déterminant ainsi, sans… »</span> (ouverture typique du MBL)</p>
+<details class="warnd" open><summary>⚠ Confusion fréquente : MBL ou VIOLATION</summary><div class="inner"><p style="margin:6px 0"><b>Le test</b> : le fait <b>manque</b> → MBL ; le fait est <b>établi</b> mais sans effet → VIOLATION.</p><ul style="margin:4px 0 6px 18px;padding:0"><li>« sans rechercher / sans caractériser [un fait] » → <b>MBL</b>, même si la formule terminale est « a violé ». Le verbe terminal ne bascule pas la famille quand le grief retenu est une carence dans l'établissement des faits.</li><li>Le miroir : « n'a pas tiré les conséquences légales de ses constatations », « alors qu'il résultait de ses constatations que… » → <b>VIOLATION</b> (résistance) : le fait est établi, le juge n'en tire pas l'effet.</li></ul><p style="margin:6px 0"><b>Deux clôtures proches, deux familles</b> :</p><ul style="margin:4px 0 6px 18px;padding:0"><li>« n'a pas donné de <b>base légale</b> à sa décision » = MBL</li><li>« n'a pas tiré les <b>conséquences légales</b> » = VIOLATION</li></ul><p style="margin:6px 0">Ce n'est pas la même chose.</p></div></details>
+</div></details>
+
+<details><summary>8 · VIOLATION<span class="def">le juge a mal appliqué une règle de droit, famille par défaut, en dernier dans la cascade</span></summary><div class="inner">
+<p><b>Définition :</b> l'arrêt a mal appliqué la loi. Il a refusé d'appliquer une règle, l'a mal interprétée, ou l'a appliquée à une situation qu'elle ne vise pas. C'est la famille la plus fréquente et la plus générique. Elle passe donc en dernier : un « a violé » nu ne l'emporte que si aucune famille plus spécifique n'a de signal. Doctrine (Boré §72.05) : un seul cas d'ouverture, trois <i>formes</i> (refus d'application, fausse interprétation, fausse application).</p>
+<table><tbody><tr><th>Repère</th><th>Ce que ça recouvre</th><th>Formulations clés</th></tr>
+<tr><td><b>RESISTANCE</b></td><td>La CA a constaté les faits mais en tire une conséquence juridique qui les contredit. Test de l'antonyme : la chose constatée est-elle l'inverse exact de la chose jugée ? Miroir du MBL : ici le fait est établi. S'il manque (« sans rechercher / caractériser »), c'est MBL.</td><td>« alors qu'il résultait de ses propres constatations que… », « alors qu'elle avait constaté que… », « n'a pas tiré les conséquences légales de ses (propres) constatations », « tout en constatant que… ». Ne pas confondre avec « n'a pas donné de base légale à sa décision », qui est la clôture du MBL.</td></tr>
+<tr><td><b>REFUS_EXPLICITE</b></td><td>La Cour nomme expressément le refus d'application.</td><td>« par refus d'application », « a refusé d'appliquer »</td></tr>
+<tr><td><b>VIOL_MAUVAISE_LECTURE</b></td><td>La Cour nomme lexicalement la fausse application ou la fausse interprétation. Seulement si le mot est présent.</td><td>« par fausse application », « a faussement interprété », « a ajouté au texte une condition qu'il ne comporte pas »</td></tr>
+<tr><td><b>VIOL_DIRECTE</b></td><td>Violation dont le mode n'est pas nommé. Cas par défaut.</td><td>« a violé le texte / l'article susvisé » (nu). Clôture générique : vérifier d'abord qu'aucune famille plus précise ne s'applique, VIOLATION = défaut</td></tr>
+</tbody></table>
+<p><b>Formules les plus fréquentes du corpus :</b> <span class="fx">« la cour d'appel a violé les textes susvisés »</span> · <span class="fx">« a violé le texte susvisé »</span> · <span class="fx">« alors qu'il résultait de ses constatations que… »</span> · <span class="fx">« alors qu'elle avait constaté que… »</span> · <span class="fx">« n'a pas tiré les conséquences légales de ses constatations »</span> · <span class="fx">« En statuant ainsi, la cour d'appel… »</span> / <span class="fx">« Qu'en statuant ainsi… »</span> (ouvertures de la zone-verdict)</p>
+</div></details>
+
+<h2>5 · Faux amis &amp; cas particuliers</h2>
+<table><tbody><tr><th>Situation</th><th>Conduite</th></tr>
+<tr><td><b>« article 14 » / « article 16 »</b></td><td><span class="art">14 et 16 CPC</span> → VIOL_PROC_CONTRADICTOIRE. <span class="art">16 décret 91-1197</span> → VIOLATION.</td></tr>
+<tr><td><b>« omission » / <span class="art">art. 463</span></b></td><td>Thème « omission de statuer » + visa <span class="art">463</span> + « a violé » → VIOLATION. OMISSION_ULTRA_PETITA seulement si l'arrêt attaqué omet lui-même.</td></tr>
+<tr><td><b>« inconciliable »</b></td><td>Visa <span class="art">618</span> → CONTRARIETE_JUGEMENTS. Sinon (Bruxelles I, connexité) → VIOLATION.</td></tr>
+<tr><td><b>Voie de conséquence (<span class="art">art. 624/625</span>)</b></td><td>Le chef est cassé parce qu'un autre l'a été (« la cassation entraîne par voie de conséquence… ») : effet procédural, <b>pas un cas d'ouverture</b>. Si un grief propre existe dans la zone-verdict, classer sur ce grief. Sinon, choisir « Autre / Indéterminé » (touche 9) et noter « voie de conséquence » en note libre.</td></tr>
+<tr><td><b>Pas un cas d'ouverture</b></td><td>Le segment affiché ne contient pas de cassation (rejet, bloc procédural) : choisir « Autre / Indéterminé » (touche 9) et noter « pas de cassation dans le texte ».</td></tr>
+<tr><td><b>Angle mort réel</b></td><td>Vraie cassation que la taxonomie ne capture pas : choisir « Autre / Indéterminé » (touche 9) et décrire le cas en note libre.</td></tr>
+</tbody></table>
+
+<h2>6 · Récapitulatif des articles</h2>
+<table><tbody><tr><th>Article</th><th>Ce qu'il dit</th><th>Famille associée</th></tr>
+<tr><td><span class="art">455 CPC</span></td><td>tout jugement doit être motivé et répondre aux conclusions</td><td>VICE_MOTIFS (signature)</td></tr>
+<tr><td><span class="art">14 et 16 CPC</span></td><td>nul ne peut être jugé sans être entendu ou appelé, principe de la contradiction</td><td>VIOL_PROC_CONTRADICTOIRE</td></tr>
+<tr><td><span class="art">4 et 5 CPC</span></td><td>objet du litige : le juge statue sur tout ce qui est demandé, rien que ce qui est demandé</td><td>EXCES_OFFICE · OMISSION_ULTRA_PETITA</td></tr>
+<tr><td><span class="art">447, 454, 456, 458 CPC</span></td><td>forme du jugement (composition, mentions, signatures)</td><td>VICE_FORME</td></tr>
+<tr><td><span class="art">1192 c. civ.</span> (ex-1134)</td><td>le juge ne peut dénaturer les termes clairs et précis</td><td>DENATURATION</td></tr>
+<tr><td><span class="art">618 CPC</span></td><td>contrariété de décisions inconciliables</td><td>CONTRARIETE_JUGEMENTS (vide)</td></tr>
+<tr><td><span class="art">624 / 625 CPC</span></td><td>la cassation s'étend aux chefs dépendants (voie de conséquence)</td><td>aucune (effet procédural, pas une famille)</td></tr>
+<tr><td><span class="art">463 CPC</span></td><td>procédure de réparation d'une omission de statuer</td><td>faux ami → VIOLATION en général</td></tr>
+<tr><td><span class="art">12 CPC</span></td><td>le juge tranche selon les règles de droit applicables</td><td>souvent VIOLATION / EXCES_OFFICE</td></tr>
+</tbody></table>
+
+<h2>7 · Procédure d'annotation</h2>
+<ul>
+<li>Lire d'abord la <b>zone-verdict</b> (visa + « En statuant ainsi » + formule terminale), pas le résumé du moyen.</li>
+<li>Identifier la famille par les <b>marqueurs</b> de la réponse, en descendant la <b>cascade</b> (§3) : le premier indicateur précis l'emporte. « a violé » est la clôture générique : ne conclure VIOLATION que si rien de plus précis n'apparaît (cas emblématique : « sans rechercher / caractériser » → MBL). Les clôtures spécifiques du §2 restent décisives, les repères du §4 confirment.</li>
+<li>Mot piégeux (« sans rechercher », « contradiction », « omission », « inconciliable », « 16 », « constaté », « généraux ») → vérifier les faux amis (§5) et les encadrés « Ne pas confondre » de la famille avant de cocher.</li>
+</ul>
+
+</div>
+
+<div class="pane memo" id="p-memo">
+<p class="small">Ordre de la cascade : descendre le tableau, la première famille dont un signal est présent l'emporte. On annote la famille seule.</p>
+<div class="famt">1 · OMISSION_ULTRA_PETITA <span class="fd">l'arrêt omet de statuer, ou statue au-delà de la demande (<span class="art">art. 4 et 5 CPC</span>)</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">omission / ultra petita</td><td>chef de demande oublié, ou accordé sans être demandé</td><td>« en omettant de statuer sur » · « a omis de statuer sur la demande » · « a statué sur chose non demandée »</td></tr>
+</tbody></table>
+<div class="famt">2 · EXCES_OFFICE <span class="fd">le juge sort de son office, ou la décision perd son fondement</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">incompétence</td><td>la juridiction ne pouvait pas statuer</td><td>« incompétent pour connaître de »</td></tr>
+<tr><td class="rp">perte de fondement</td><td>le texte ou la décision-support a disparu</td><td>« privé de fondement juridique » · « doit être annulé pour perte de fondement juridique »</td></tr>
+<tr><td class="rp">excès de pouvoir</td><td>saisine ou objet du litige méconnus (<span class="art">art. 4 et 5 CPC</span>)</td><td>« a méconnu l'étendue de sa saisine / de ses pouvoirs / son office » · « a modifié l'objet du litige » · « a méconnu les termes / l'objet du litige » · « a excédé ses pouvoirs » · « il lui appartenait de statuer sur »</td></tr>
+</tbody></table>
+<div class="famt">3 · VICE_FORME <span class="fd">forme de la décision, ou contradictoire</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">vice de forme</td><td>mentions, signatures, composition (<span class="art">art. 447, 454, 456, 458 CPC</span>)</td><td>« n'a pas satisfait aux exigences [de forme] » · visa des articles 456 / 458 · « l'ordonnance n'était pas signée »</td></tr>
+<tr><td class="rp">contradictoire</td><td>moyen relevé d'office sans inviter les parties, partie jugée sans être entendue (<span class="art">art. 14 et 16 CPC</span>)</td><td>« sans inviter les parties à présenter leurs observations » · « sans avoir au préalable invité les parties à s'expliquer » · « relevé d'office » · « principe de la contradiction » · « droits de la défense »</td></tr>
+</tbody></table>
+<div class="famt">4 · CONTRARIETE_JUGEMENTS <span class="fd">décisions inconciliables (<span class="art">art. 618</span>)</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">contrariété de jugements</td><td>deux décisions passées en force de chose jugée sont inconciliables, la seconde est cassée</td><td>visa « Vu l'article 618 du code de procédure civile » · « décisions inconciliables » · « inconciliables dans leur exécution »</td></tr>
+</tbody></table>
+<div class="famt">5 · VICE_MOTIFS <span class="fd">la motivation est défectueuse (<span class="art">art. 455 CPC</span>)</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">défaut de réponse</td><td>un moyen identifié reste sans réponse</td><td>« sans répondre aux conclusions » · « n'a pas répondu au moyen tiré de » · « défaut de réponse aux conclusions » · « n'a pas satisfait aux exigences du texte susvisé » (visa 455)</td></tr>
+<tr><td class="rp">motifs contre dispositif</td><td>contradiction entre les motifs et le dispositif</td><td>« contradiction entre les motifs et le dispositif » · « retenu dans les motifs… mais ordonné dans le dispositif »</td></tr>
+<tr><td class="rp">motifs contradictoires</td><td>les motifs se contredisent entre eux</td><td>« contradiction de motifs » · « motifs inconciliables entre eux » · « s'est contredite »</td></tr>
+<tr><td class="rp">motifs dubitatifs</td><td>le juge suppose, ne tranche pas</td><td>« motifs dubitatifs » · « motifs hypothétiques » · « il semble que »</td></tr>
+<tr><td class="rp">défaut de motifs</td><td>absence de motifs</td><td>« sans énoncer de motif » · « sans motiver sa décision » · « se borne à rappeler les termes de la requête »</td></tr>
+</tbody></table>
+<div class="famt">6 · DENATURATION <span class="fd">un écrit clair et précis est trahi</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">dénaturation</td><td>sens clair d'un contrat, de conclusions, d'une pièce, contredit (<span class="art">art. 1192 c. civ.</span>, ex-1134)</td><td>« a dénaturé » · « en dénaturant les termes clairs et précis de » · « dénaturation des conclusions / du contrat » · visa « Vu l'obligation pour le juge de ne pas dénaturer l'écrit qui lui est soumis »</td></tr>
+</tbody></table>
+<div class="famt">7 · MBL <span class="fd">les faits constatés ne permettent pas de contrôler l'application de la loi</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">motifs inopérants</td><td>motifs sans portée sur la solution</td><td>« par des motifs inopérants » · « par un motif inopérant »</td></tr>
+<tr><td class="rp">motifs impropres</td><td>insuffisants à caractériser une condition</td><td>« par des motifs impropres à caractériser » · « ne suffisent pas à caractériser » · « ne permettent pas de caractériser » · « motifs généraux »</td></tr>
+<tr><td class="rp">recherche omise</td><td>une recherche factuelle déterminée manque</td><td>« sans rechercher, comme il le lui était demandé, si » · « sans constater que » · « sans caractériser » · « sans vérifier » · « sans s'expliquer sur » · « il lui appartenait de rechercher »</td></tr>
+<tr><td class="rp">MBL pur</td><td>« pas de base légale » sans autre précision</td><td>« n'a pas donné de base légale à sa décision » · « a privé sa décision de base légale » · « ne met pas la Cour en mesure d'exercer son contrôle » · « s'est bornée à » · ouverture « En se déterminant ainsi »</td></tr>
+</tbody></table>
+<div class="famt">8 · VIOLATION <span class="fd">la règle de droit est mal appliquée · en dernier dans la cascade</span></div>
+<table class="lean"><tbody><tr><th>Sous-famille</th><th>En une phrase</th><th>Formules clés</th></tr>
+<tr><td class="rp">résistance</td><td>la conséquence juridique contredit les constatations</td><td>« alors qu'il résultait de ses propres constatations que » · « alors qu'elle avait constaté que » · « n'a pas tiré les conséquences légales de ses constatations »</td></tr>
+<tr><td class="rp">refus explicite</td><td>refus d'application nommé</td><td>« par refus d'application » · « a refusé d'appliquer »</td></tr>
+<tr><td class="rp">fausse application nommée</td><td>le mode de violation est cité</td><td>« par fausse application » · « a faussement interprété » · « a ajouté au texte une condition qu'il ne comporte pas »</td></tr>
+<tr><td class="rp">violation directe</td><td>« a violé » sans autre précision</td><td>« a violé le texte / les textes susvisés » · « a violé le principe susvisé » · « a violé l'article »</td></tr>
+</tbody></table>
+<p class="small" style="margin-top:14px">Articles hors familles : <span class="art">art. 624/625 CPC</span> (voie de conséquence : effet procédural, statut à part, hors du lot à annoter) · <span class="art">art. 463 CPC</span> (thème « omission de statuer » : faux ami, en général VIOLATION) · <span class="art">art. 12 CPC</span> (office du juge : souvent VIOLATION ou EXCES_OFFICE).</p>
+</div>
+
+<script>
+document.querySelectorAll('.tb').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on')});
+  document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');document.getElementById('p-'+b.dataset.t).classList.add('on');});});
+</script>
+
+<p class="small" style="margin-top:24px">Fondement doctrinal : Boré &amp; Boré, <i>La cassation en matière civile</i>, Dalloz Action, 6<sup>e</sup> éd.</p>
+</div></body></html>

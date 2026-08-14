@@ -1,0 +1,888 @@
+{
+ "version": "v50",
+ "description": "Grid v50: cascade of regex patterns detecting r-codes (rejection markers). Includes 10 recall patterns for rejections previously misclassified as aucun_match (R3 free-form \"n'est pas fonde\"/\"ne peut etre accueilli\", R4 inoperant, R2g irrecevable, R5 \"ne tend qu'a\", R6b \"exactement\"/\"a bon droit\", R7a \"manque en fait/droit\"), all anchored on the grammatical subject with sense guards.",
+ "patterns": {
+  "R1a_RNSM_total": {
+   "regex": "il\\s+n['’]y\\s+a\\s+(?:donc\\s+)?pas\\s+lieu\\s+de\\s+statuer\\s+par\\s+une\\s+décision\\s+spécialement\\s+motivée",
+   "family": "R1",
+   "version": "v1",
+   "bore": "Titre 12, chap. 121.21-25 ; art. 1014 al. 1er CPC"
+  },
+  "R1b_RNSM_partiel": {
+   "regex": "article\\s+1014,?\\s+alinéa\\s+2|alinéa\\s+2\\s+de\\s+l['’]article\\s+1014",
+   "family": "R1",
+   "version": "v1",
+   "bore": "Titre 12, chap. 121.21-25 ; art. 1014 al. 2 CPC"
+  },
+  "R1_n_est_manifestement_pas": {
+   "regex": "n['’]est\\s+manifestement\\s+pas\\s+de\\s+nature\\s+à\\s+entraîner\\s+la\\s+cassation",
+   "family": "R1",
+   "version": "v1",
+   "bore": "Titre 12, chap. 121.21-25 ; art. 1014 CPC"
+  },
+  "R2a_moyen_nouveau": {
+   "regex": "moyen\\s+(?:est\\s+)?nouveau\\s*(?:,\\s*)?(?:et\\s+)?(?:est\\s+)?mélangé\\s+de\\s+fait\\s+et\\s+de\\s+droit|mélangé\\s+de\\s+fait\\s+et\\s+de\\s+droit\\s*(?:,\\s*)?(?:est\\s+)?nouveau",
+   "family": "R2a",
+   "version": "v1",
+   "bore": "Titre 8, chap. 82 (entier)"
+  },
+  "R2a_partant_irrecevable": {
+   "regex": "partant,?\\s+irrecevable",
+   "family": "R2a",
+   "version": "v1",
+   "bore": "Titre 8, chap. 82"
+  },
+  "R2b_motif_surabondant_critique": {
+   "regex": "abstraction\\s+faite\\s+(?:du|d['’]un)\\s+motif\\s+(?:erroné\\s+(?:mais\\s+)?)?surabondant",
+   "family": "R2b",
+   "version": "v1",
+   "bore": "Titre 8, chap. 83.41-79 + Titre 12, 124.171"
+  },
+  "R2c_moyen_incompatible": {
+   "regex": "(?:moyen|thèse|prétention)\\s+(?:est\\s+)?(?:incompatible|contraire)\\s+(?:avec\\s+(?:la\\s+)?(?:thèse|position|argumentation))",
+   "family": "R2c",
+   "version": "v1",
+   "bore": "Titre 8, chap. 82 + jurisprudence"
+  },
+  "R2d_moyen_imprecis": {
+   "regex": "(?:le\\s+)?moyen,?\\s+qui\\s+ne\\s+précise\\s+pas|(?:le\\s+)?moyen\\s+(?:est\\s+)?(?:imprécis|manque\\s+de\\s+précision)",
+   "family": "R2d",
+   "version": "v1",
+   "bore": "Titre 8, chap. 81 sect. 2"
+  },
+  "R2e_sans_interet": {
+   "regex": "(?:moyen|grief|branche|critique)\\s*(?:,[^,.]{0,40})?\\s+(?:est\\s+)?sans\\s+(?:intérêt|portée)",
+   "family": "R2e",
+   "version": "v1",
+   "bore": "Titre 12, 121.51 + 121.62 ; Titre 8, chap. 83 sect. 1"
+  },
+  "R2e_privé_de_portee": {
+   "regex": "privé[e]?\\s+de\\s+portée",
+   "family": "R2e",
+   "version": "v1",
+   "bore": "Titre 12, 121.51 + 121.62"
+  },
+  "R3a_moyen_non_fonde": {
+   "regex": "(?:le\\s+)?moyen\\s+n['’]est\\s+pas\\s+fondé",
+   "family": "R3",
+   "version": "v1",
+   "bore": "Titre 12, chap. 121.61-62 ; Titre 8, chap. 80.05"
+  },
+  "R3a_dou_il_suit": {
+   "regex": "d['’]o[uù]\\s+il\\s+suit\\s+que\\s+(?:le\\s+)?moyen\\s+(?:n['’]est\\s+pas\\s+fondé|ne\\s+saurait\\s+être\\s+accueilli|ne\\s+peut\\s+être\\s+accueilli)",
+   "family": "R3",
+   "version": "v1",
+   "bore": "Titre 12, chap. 121.61-62"
+  },
+  "R3a_ne_peut_etre_accueilli": {
+   "regex": "(?:le\\s+)?moyen\\s+ne\\s+(?:peut|saurait)\\s+(?:donc\\s+)?être\\s+accueilli",
+   "family": "R3",
+   "version": "v1",
+   "bore": "Titre 12, chap. 121.61-62"
+  },
+  "R3_v2_post2019": {
+   "regex": "^\\s*\\d+\\.\\s*(?:[Ll]e\\s+moyen|En\\s+conséquence,?\\s+le\\s+moyen)\\s+n['’]est\\s+(?:donc\\s+)?pas\\s+fondé",
+   "family": "R3",
+   "version": "v2",
+   "bore": "Titre 12, chap. 121.61-62 (forme post-2019)",
+   "flags": "MULTILINE"
+  },
+  "R3_v2_ne_peut_prosperer": {
+   "regex": "(?:le\\s+)?moyen\\s+(?:n[e']\\s*(?:peut|saurait|pourrait))\\s+(?:donc\\s+)?(?:prosperer|prospérer|être\\s+(?:donc\\s+)?accueilli)",
+   "family": "R3",
+   "version": "v2",
+   "bore": "Titre 12, chap. 121.61-62"
+  },
+  "R3_v3_pluriel": {
+   "regex": "(?:les\\s+)?moyens?\\s+(?:ne\\s+(?:peuvent|sauraient|peut|saurait))\\s+(?:donc\\s+|prosperer\\s+ni\\s+)?(?:être\\s+(?:donc\\s+)?(?:accueilli|accueillis|accueillies?))",
+   "family": "R3",
+   "version": "v3",
+   "bore": "Titre 12, chap. 121.61-62 (variante pluriel)"
+  },
+  "R4_moyen_inoperant": {
+   "regex": "(?:le\\s+)?moyen[,\\s]+(?:qui\\s+[^,]{1,150}?,\\s+)?(?:est\\s+|étant\\s+)?inopérant",
+   "family": "R4",
+   "version": "v1",
+   "bore": "Titre 8, chap. 83 entier"
+  },
+  "R4_grief_inoperant": {
+   "regex": "(?:le\\s+)?grief\\s+(?:est\\s+|étant\\s+)?inopérant",
+   "family": "R4",
+   "version": "v1",
+   "bore": "Titre 8, chap. 83"
+  },
+  "R5a_souverainement": {
+   "regex": "(?:cour\\s+d['’]appel|juges?\\s+du\\s+fond|conseil\\s+de\\s+prud['’]hommes)\\s+(?:a|ont|qui\\s+a|qui\\s+ont)\\s+souverainement\\s+(?:apprécié|estimé|retenu|relevé|évalué|constaté|déduit|décidé|jugé|considéré)",
+   "family": "R5",
+   "version": "v1",
+   "bore": "Titre 6, chap. 64 ; Titre 12, 124.181"
+  },
+  "R5a_pouvoir_souverain": {
+   "regex": "(?:dans\\s+l['’]exercice\\s+de\\s+(?:son|leur)\\s+pouvoir\\s+souverain|pouvoir\\s+souverain\\s+d['’]appr[ée]ciation|pouvoir\\s+souverain\\s+(?:des|de\\s+la)\\s+(?:juges?\\s+du\\s+fond|cour\\s+d['’]appel))",
+   "family": "R5",
+   "version": "v1",
+   "bore": "Titre 6, chap. 64"
+  },
+  "R5a_appreciation_souveraine": {
+   "regex": "appréciations?\\s+souveraines?\\s+(?:des\\s+)?(?:juges?\\s+du\\s+fond|éléments\\s+de\\s+preuve|de\\s+la\\s+valeur|des\\s+pi[èe]ces)",
+   "family": "R5",
+   "version": "v1",
+   "bore": "Titre 6, chap. 64"
+  },
+  "R5b_remettre_en_discussion": {
+   "regex": "(?:moyen\\s+(?:qui\\s+)?ne\\s+tend\\s+qu['’]à\\s+)?remettre\\s+en\\s+(?:discussion|cause|question)\\s+(?:devant\\s+la\\s+Cour\\s+de\\s+cassation\\s+)?(?:les?\\s+appréciations?|le\\s+pouvoir\\s+souverain)",
+   "family": "R5",
+   "version": "v1",
+   "bore": "Titre 6, chap. 64 sect. 2"
+  },
+  "R5c_hors_denaturation": {
+   "regex": "hors\\s+toute\\s+dénaturation|sans\\s+dénaturation",
+   "family": "R5",
+   "version": "v1",
+   "bore": "Titre 7, chap. 79 + Titre 6 chap. 64"
+  },
+  "R5_v3_elle_souverainement": {
+   "regex": "elle\\s+a\\s+souverainement\\s+(?:apprécié|estimé|retenu|relevé|évalué|constaté|déduit|décidé|jugé|considéré)",
+   "family": "R5",
+   "version": "v3",
+   "bore": "Titre 6, chap. 64 (variante anaphorique)"
+  },
+  "R6a_a_pu": {
+   "regex": "(?:la\\s+)?cour\\s+d['’]appel\\s+a\\s+pu\\s+(?:en\\s+)?(?:déduire|décider|retenir|juger|considérer|estimer|conclure|énoncer)",
+   "family": "R6a",
+   "version": "v1",
+   "bore": "Titre 6, chap. 65 sect. 2 ; BICC n° 661, 15 mai 2007"
+  },
+  "R6a_v2_a_pu_large": {
+   "regex": "(?:la\\s+)?cour\\s+d['’]appel\\s+(?:,?\\s*qui\\s+[^.]{1,200}?,\\s+|qui\\s+[^.]{1,200}?\\s+)?a\\s+pu\\s+(?:en\\s+)?(?:déduire|décider|retenir|juger|considérer|estimer|conclure|énoncer)",
+   "family": "R6a",
+   "version": "v2",
+   "bore": "Titre 6, chap. 65 (tolérance proposition relative)"
+  },
+  "R6a_v3_a_pu": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:les\\s+)?juges?\\s+du\\s+fond|elle|(?:le\\s+)?conseil\\s+de\\s+prud['’]hommes)\\s*(?:,\\s*qui\\s+[^.;]{1,250}?,\\s+)?a\\s+pu\\s+(?:en\\s+|valablement\\s+|légalement\\s+)?(?:déduire|décider|retenir|juger|considérer|estimer|conclure|énoncer)",
+   "family": "R6a",
+   "version": "v3",
+   "bore": "Titre 6, chap. 65 (tolérance large : sujets + relative)"
+  },
+  "R6b_exactement": {
+   "regex": "(?:cour\\s+d['’]appel|juges?\\s+du\\s+fond)\\s+(?:a|ont)\\s+exactement\\s+(?:décidé|jugé|retenu|déduit|énoncé|considéré|estimé|apprécié|appliqué)",
+   "family": "R6b",
+   "version": "v1",
+   "bore": "Titre 6, chap. 65 ; 124.191 ; BICC 661"
+  },
+  "R6b_a_bon_droit": {
+   "regex": "(?:cour\\s+d['’]appel|juges?\\s+du\\s+fond)\\s+(?:a|ont)[,\\s]+(?:donc\\s+)?(?:à\\s+bon\\s+droit|à\\s+juste\\s+titre|justement)",
+   "family": "R6b",
+   "version": "v1",
+   "bore": "BICC 661, 15 mai 2007"
+  },
+  "R6b_exacte_application": {
+   "regex": "(?:a|ont)\\s+fait\\s+(?:l['’]exacte|une\\s+exacte)\\s+application",
+   "family": "R6b",
+   "version": "v1",
+   "bore": "BICC 661, 15 mai 2007"
+  },
+  "R6b_v3_exactement": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:les\\s+)?juges?\\s+du\\s+fond|elle)\\s*(?:,\\s*qui\\s+[^.;]{1,250}?,\\s+)?a\\s+exactement\\s+(?:décidé|jugé|retenu|déduit|énoncé|considéré|estimé|apprécié|appliqué|qualifié)",
+   "family": "R6b",
+   "version": "v3",
+   "bore": "Titre 6, chap. 65 (tolérance large)"
+  },
+  "R6b_v3_a_bon_droit": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:les\\s+)?juges?\\s+du\\s+fond|elle)\\s*(?:,\\s*qui\\s+[^.;]{1,250}?,\\s+)?a[\\s,]+(?:donc\\s+)?(?:à\\s+bon\\s+droit|à\\s+juste\\s+titre|justement)",
+   "family": "R6b",
+   "version": "v3",
+   "bore": "BICC 661 (tolérance large)"
+  },
+  "R7a_manque_en_fait": {
+   "regex": "(?:le\\s+)?moyen\\s+manque\\s+(?:par\\s+le\\s+fait\\s+qui\\s+lui\\s+sert\\s+de\\s+base|en\\s+fait)",
+   "family": "R7a",
+   "version": "v1",
+   "bore": "Titre 7, chap. 78.129"
+  },
+  "R7b_manque_en_droit": {
+   "regex": "(?:le\\s+)?moyen\\s+manque\\s+en\\s+droit",
+   "family": "R7b",
+   "version": "v1",
+   "bore": "Titre 7, chap. 78.129"
+  },
+  "R8a_legalement_justifiee": {
+   "regex": "(?:décision|arrêt)\\s+(?:se\\s+)?trouve\\s+(?:ainsi\\s+)?légalement\\s+justifié",
+   "family": "R8b",
+   "version": "v1",
+   "bore": "Titre 8, chap. 83.52 ; Titre 12, 124.201"
+  },
+  "R8a_motif_pur_droit": {
+   "regex": "motif\\s+de\\s+pur\\s+droit",
+   "family": "R8a",
+   "version": "v1",
+   "bore": "Titre 7, chap. 78.33 ; art. 620 CPC"
+  },
+  "R8_v2_a_legalement_justifie": {
+   "regex": "(?:cour\\s+d['’]appel|juges?\\s+du\\s+fond|elle)\\s+(?:a|ont)\\s+(?:ainsi\\s+|donc\\s+)?légalement\\s+justifié\\s+(?:sa|leur|la)\\s+décision",
+   "family": "R8b",
+   "version": "v2",
+   "bore": "Titre 8, chap. 83.52 (forme active)"
+  },
+  "R8_v2_justifie_legalement": {
+   "regex": "justifi[eé]\\s+(?:donc\\s+|ainsi\\s+)?légalement\\s+(?:sa|la|leur)\\s+décision",
+   "family": "R8b",
+   "version": "v2",
+   "bore": "Titre 8, chap. 83.52"
+  },
+  "R8_v3_legalement_justifie": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:les\\s+)?juges?\\s+du\\s+fond|elle|(?:le\\s+)?conseil\\s+de\\s+prud['’]hommes)\\s*(?:,\\s*qui\\s+[^.;]{1,250}?,\\s+)?(?:a|ont)\\s+(?:ainsi\\s+|donc\\s+)?légalement\\s+justifié\\s+(?:sa|leur|la)\\s+décision",
+   "family": "R8b",
+   "version": "v3",
+   "bore": "Titre 8, chap. 83.52 (tolérance large)"
+  },
+  "R8_v3_a_justifie": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:les\\s+)?juges?\\s+du\\s+fond|elle)\\s*(?:,\\s*qui\\s+[^.;]{1,250}?,\\s+)?a\\s+(?:ainsi\\s+|donc\\s+)?justifié\\s+sa\\s+décision",
+   "family": "R8b",
+   "version": "v3",
+   "bore": "Titre 8, chap. 83.52 (variante sans « légalement »)"
+  },
+  "R9_motifs_propres_adoptes": {
+   "regex": "(?:par\\s+)?motifs?\\s+(?:propres\\s+et\\s+adoptés?|tant\\s+propres?\\s+qu['’]adoptés?|adoptés?\\s+et\\s+propres?)",
+   "family": "R9",
+   "version": "v1",
+   "bore": "Titre 7, chap. 77 sect. 3 §1"
+  },
+  "R9_motifs_premiers_juges": {
+   "regex": "adopt(?:ant|és?|é)\\s+(?:les\\s+motifs\\s+)?(?:non\\s+contraires?\\s+)?(?:du\\s+premier\\s+juge|des\\s+premiers\\s+juges)",
+   "family": "R9",
+   "version": "v1",
+   "bore": "Titre 7, chap. 77 sect. 3 §1"
+  },
+  "R10_atteinte_disproportionnee": {
+   "regex": "atteinte\\s+(?:dis)?proportionnée",
+   "family": "R10",
+   "version": "v1",
+   "bore": "Titre 6, chap. 65 sect. 2 §2 E"
+  },
+  "R10_juste_equilibre": {
+   "regex": "(?:juste|équitable)\\s+équilibre\\s+entre",
+   "family": "R10",
+   "version": "v1",
+   "bore": "Titre 6, chap. 65 sect. 2 §2 E"
+  },
+  "R12_motifs_surabondants": {
+   "regex": "motifs?\\s+(?:qui\\s+(?:sont|est)|étant)\\s+surabondants?|motif\\s+surabondant|(?:abstraction\\s+faite\\s+des?\\s+|critiqu\\w+\\s+|s['’]attaqu\\w+\\s+[àa]\\s+)(?:ces\\s+|les\\s+|des\\s+|de\\s+)?motifs?\\s+surabondants?",
+   "family": "R12",
+   "version": "v1",
+   "bore": "Titre 8, chap. 83.41-79 ; Titre 12, 124.171"
+  },
+  "R5_v4_appreciant_souverainement": {
+   "regex": "(?:appr[ée]ciant|estimant|retenant|relevant|constatant|jugeant|consid[ée]rant)\\s+souverainement",
+   "family": "R5",
+   "version": "v5",
+   "bore": "Titre 6, chap. 64 (forme participiale/gerondif)",
+   "origin_ngram": "appreciant souverainement"
+  },
+  "R5_v4_appreciation_souveraine_elements": {
+   "regex": "appr[ée]ciation\\s+souveraine\\s+(?:par\\s+laquelle|des?\\s+(?:[ée]l[ée]ments?|faits|preuves?|donn[ée]es|circonstances?))",
+   "family": "R5",
+   "version": "v6",
+   "bore": "Titre 6, chap. 64 (variante 'appreciation souveraine + complement')",
+   "origin_ngram": "appreciation souveraine des elements"
+  },
+  "R5_v4_souverainement_apprecies": {
+   "regex": "souverainement\\s+(?:appr[ée]ci[ée]?s?|estim[ée]?s?|retenus?e?|relev[ée]?s?|consid[ée]r[ée]?s?|d[ée]duits?e?s?|[ée]valu[ée]?e?s?|constat[ée]?e?s?|d[ée]cid[ée]?e?s?|jug[ée]?e?s?|justifi[ée]?e?s?|interpr[ée]t[ée]?e?s?)",
+   "family": "R5",
+   "version": "v7",
+   "bore": "Titre 6, chap. 64 (forme passive)",
+   "origin_ngram": "souverainement apprecies"
+  },
+  "R5_v4_remettre_en_cause_appreciation": {
+   "regex": "remettre\\s+en\\s+(?:cause|discussion|question)\\s+(?:devant\\s+la\\s+Cour\\s+de\\s+[Cc]assation\\s+)?l['’]appr[ée]ciation\\s+souveraine",
+   "family": "R5",
+   "version": "v8",
+   "bore": "Titre 6, chap. 64 sect. 2 (remise en cause de l'appreciation souveraine)",
+   "origin_ngram": "remettre en cause l'appreciation souveraine"
+  },
+  "R3_v4_fonde_en_aucune_branches": {
+   "regex": "(?:moyen|pourvoi)\\s+n['’]est\\s+(?:donc\\s+)?fond[ée]\\s+en\\s+aucune\\s+de\\s+ses\\s+branches",
+   "family": "R3",
+   "version": "v9",
+   "bore": "Titre 12, chap. 121.61-62 (variante 'n'est fonde en aucune de ses branches')",
+   "origin_ngram": "n est fonde en aucune de ses branches"
+  },
+  "R3_v4_dou_il_suit_relative": {
+   "regex": "d['’]o[ùu]\\s+il\\s+suit\\s+que\\s+(?:les?\\s+)?moyens?\\s*,",
+   "family": "R3",
+   "version": "v10",
+   "bore": "Titre 12, chap. 121.61-62 (variante 'd'ou il suit' avec relative)",
+   "origin_ngram": "d'ou il suit que le moyen ,"
+  },
+  "R6b_v4_decide_a_bon_droit": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:les\\s+)?juges?\\s+du\\s+fond|elle)\\s+a\\s+(?:[^.;]{0,80}?\\s+)?(?:[àa]\\s+bon\\s+droit|[àa]\\s+juste\\s+titre|justement)\\s+(?:d[ée]cid[ée]|jug[ée]|retenu|d[ée]duit|estim[ée]|consid[ée]r[ée]|appr[ée]ci[ée]|appliqu[ée])",
+   "family": "R6b",
+   "version": "v11",
+   "bore": "BICC 661 (variante avec mots entre auxiliaire et adverbe)",
+   "origin_ngram": "a a bon droit decide"
+  },
+  "R6b_v4_c_est_a_bon_droit": {
+   "regex": "c['’]est\\s+(?:donc\\s+|d[èe]s\\s+lors\\s+|par\\s+suite\\s+)?[àa]\\s+(?:bon\\s+droit|juste\\s+titre)\\s+que\\s+(?:(?:la\\s+)?cour\\s+d['’]appel|le\\s+tribunal|le\\s+conseil\\b|elle|il)",
+   "family": "R6b",
+   "version": "v12",
+   "bore": "BICC 661 (variante 'c'est a bon droit que')",
+   "origin_ngram": "c'est a bon droit que la cour d'appel"
+  },
+  "R6b_v5_en_a_exactement": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:la\\s+)?[Cc]our\\s+nationale|(?:les\\s+)?juges?\\s+du\\s+fond|elle)\\s+(?:[^.;,]{0,40}\\s+)?en\\s+a\\s+(?:donc\\s+)?exactement\\s+(?:d[ée]duit|d[ée]cid[ée]|retenu|jug[ée]|consid[ée]r[ée]|estim[ée]|appliqu[ée]|appr[ée]ci[ée]|qualifi[ée])",
+   "family": "R6b",
+   "version": "v13",
+   "bore": "BICC 661 (variante avec 'en a exactement deduit')",
+   "origin_ngram": "en a exactement deduit"
+  },
+  "R5_v5_apprec_souverainement_elements": {
+   "regex": "appr[ée]ciant\\s+(?:souverainement\\s+)?(?:les?\\s+)?[ée]l[ée]ments?\\s+(?:de\\s+fait|de\\s+preuve|du\\s+litige)",
+   "family": "R5",
+   "version": "v18",
+   "bore": "Titre 6, chap. 64 (forme participiale 'appreciant ... elements')",
+   "origin_ngram": "appreciant elements de fait"
+  },
+  "R3_pre1990_dou_il_suit_archaic": {
+   "regex": "D['’]OU\\s+IL\\s+SUIT\\s+QUE\\s+(?:LE\\s+|LES\\s+)?(?:MOYEN|POURVOI|PREMIER\\s+MOYEN|DEUXIEME\\s+MOYEN|SECOND\\s+MOYEN|MOYENS|MOYEN\\s+UNIQUE)",
+   "family": "R3",
+   "version": "v19",
+   "bore": "Titre 12, 121.61-62 (formule archaïque pre-1990 en majuscules sans accent)",
+   "era": "pre-1990",
+   "origin_ngram": "R3_pre1990_dou_il_suit_archaic"
+  },
+  "R6a_pre1990_a_pu_archaic": {
+   "regex": "(?:COUR\\s+D['’]APPEL|JUGES?\\s+DU\\s+FOND|ELLE|CONSEIL\\s+DE\\s+PRUD['’]HOMMES)\\s*(?:,?\\s*QUI\\s+[^.;]{1,250}?,?\\s+)?A\\s+PU\\s+(?:EN\\s+|VALABLEMENT\\s+|LEGALEMENT\\s+|SANS\\s+[^,;.]{0,80}?\\s+)*(?:DEDUIRE|DECIDER|RETENIR|JUGER|CONSIDERER|ESTIMER|CONCLURE|ENONCER)",
+   "family": "R6a",
+   "version": "v22",
+   "bore": "Titre 6, chap. 65 ; BICC 661 (controle leger - formule archaique sans accent)",
+   "era": "pre-1990",
+   "origin_ngram": "R6a_pre1990_a_pu_archaic"
+  },
+  "R6b_pre1990_a_exactement_archaic": {
+   "regex": "(?:COUR\\s+D['’]APPEL|JUGES?\\s+DU\\s+FOND|ELLE|CONSEIL\\s+DE\\s+PRUD['’]HOMMES)\\s*(?:,?\\s*QUI\\s+[^.;]{1,250}?,?\\s+)?(?:EN\\s+)?A\\s+(?:DONC\\s+)?EXACTEMENT\\s+(?:DECIDE|JUGE|RETENU|DEDUIT|ENONCE|CONSIDERE|ESTIME|APPRECIE|APPLIQUE|QUALIFIE)",
+   "family": "R6b",
+   "version": "v23",
+   "bore": "BICC 661 (controle lourd - formule archaique sans accent)",
+   "era": "pre-1990",
+   "origin_ngram": "R6b_pre1990_a_exactement_archaic"
+  },
+  "R8_v4_legalement_justifie_corrige": {
+   "regex": "(?<!n['’]a\\spas\\s)(?<!n['’]ont\\spas\\s)(?<!n['’]est\\spas\\s)(?<!n['’]a\\spas,)(?<!n['’]ont\\spas,)(?<!n['’]est\\spas,)(?<!sans\\s)l[ée]galement\\s+justifi[ée]?\\s+(?:sa|la|leur|ses)\\s+d[ée]cision",
+   "family": "R8b",
+   "version": "v24",
+   "bore": "Titre 8, chap. 83.52 ; Titre 12, 124.201 (corrige le bug FP negatif du pattern v4 - exige absence de 'n'a pas / n'ont pas / sans' dans les 30 chars avant le match)",
+   "comment_v24": "Remplace le pattern R8_v4_legalement_justifie_forme_libre buggué (V23). Post-traitement supplementaire dans apply_grille() pour les 5 FP residuels."
+  },
+  "R3_v6_moyens_pluriel_relative": {
+   "regex": "(?:les\\s+)?moyens?,?\\s+(?:qui\\s+[^.;]{1,200}?,\\s+|en\\s+(?:[^.;]{1,80}?)\\s+|r[ée]unis?\\s+)?ne\\s+sont\\s+(?:donc\\s+)?pas\\s+fond[ée]s",
+   "family": "R3",
+   "version": "v26",
+   "bore": "Titre 12, chap. 121.61-62 (variante pluriel + relative)",
+   "origin_ngram": "les moyens ne sont pas fondes"
+  },
+  "R3_v6_moyen_irrecevable": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?,?\\s+(?:qui\\s+[^.;]{1,150}?,\\s+|en\\s+(?:[^.;]{1,80}?)\\s+)?(?:est|sont)\\s+irrecevables?(?:[\\s,;.]|$)",
+   "family": "R3",
+   "version": "v28",
+   "bore": "Titre 12, chap. 121.51 (irrecevabilité du moyen - formulation directe)",
+   "origin_ngram": "moyen est irrecevable"
+  },
+  "R5_v6_contester_appreciation": {
+   "regex": "(?:moyen|moyens|grief|griefs|pourvoi)\\s+(?:qui\\s+)?ne\\s+tend(?:ent)?\\s+qu['’]à\\s+contester\\s+(?:devant\\s+la\\s+Cour\\s+de\\s+[Cc]assation\\s+)?(?:l['’]?appr[ée]ciation|le\\s+pouvoir\\s+souverain)",
+   "family": "R5",
+   "version": "v29",
+   "bore": "Titre 6, chap. 64 sect. 2 (variante 'contester' au lieu de 'remettre en discussion')",
+   "origin_ngram": "ne tend qu'a contester l'appreciation"
+  },
+  "R6a_v5_sujets_alt_a_pu": {
+   "regex": "(?:tribunal(?:\\s+(?:des\\s+affaires\\s+de\\s+s[ée]curit[ée]\\s+sociale|du\\s+contentieux\\s+de\\s+l['’]incapacit[ée]|d['’]instance|administratif|judiciaire))?|(?:le\\s+)?conseil\\s+de\\s+prud['’]hommes|(?:la\\s+)?cour\\s+nationale|(?:la\\s+)?chambre\\s+nationale|(?:le\\s+)?p[ôo]le\\s+social)\\s*(?:,\\s*qui\\s+[^.;]{1,200}?,\\s+)?a\\s+pu\\s+(?:en\\s+|valablement\\s+|l[ée]galement\\s+)?(?:d[ée]duire|d[ée]cider|retenir|juger|consid[ée]rer|estimer|conclure|[ée]noncer)",
+   "family": "R6a",
+   "version": "v31",
+   "bore": "Titre 6, chap. 65 ; BICC 661 (sujets institutionnels alternatifs)",
+   "origin_ngram": "tribunal a pu deduire"
+  },
+  "R5_v6_apprecient_souverainement_verbe": {
+   "regex": "(?:(?:les\\s+)?juges?\\s+du\\s+fond|(?:la\\s+)?cour\\s+d['’]appel|(?:le\\s+)?conseil\\s+de\\s+prud['’]hommes|(?:le\\s+)?tribunal|(?:la\\s+)?cour\\s+nationale)\\s+appr[ée]cient?\\s+souverainement",
+   "family": "R5",
+   "version": "v32",
+   "bore": "Titre 6, chap. 64 (forme conjuguée présent indicatif)",
+   "origin_ngram": "juges du fond apprecient souverainement"
+  },
+  "R3_v7_n_encourt_pas_griefs": {
+   "regex": "n['’]encourt\\s+(?:pas|aucun(?:e)?)\\s+(?:les\\s+|d['’]autres\\s+|de\\s+|le\\s+)?griefs?\\s+(?:des?\\s+|du\\s+|formul[ée]s?\\s+par\\s+)?moyens?",
+   "family": "R3",
+   "version": "v34",
+   "bore": "Titre 12, chap. 121.61-62 (variante 'n'encourt pas les griefs')",
+   "origin_ngram": "n'encourt pas les griefs des moyens"
+  },
+  "R5_v8_sous_couvert_griefs_remettre": {
+   "regex": "sous\\s+(?:le\\s+)?couvert\\s+(?:de\\s+)?(?:griefs?|critique[s]?)\\s+(?:non\\s+fond[ée]s?\\s+|infond[ée]s?\\s+)(?:de\\s+|d['’])(?:violation|insuffisance|m[ée]connaissance|d[ée]naturation|manque|d[ée]faut)",
+   "family": "R5",
+   "version": "v35",
+   "bore": "Titre 6, chap. 64 sect. 2 (formule pre-2000 'sous couvert de griefs non fondés...')",
+   "origin_ngram": "sous couvert de griefs non fondés"
+  },
+  "R3_v8_ne_saurait_etre_accueilli_relative": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?|pourvois?)\\s*,?\\s*(?:qui\\s+[^.;]{1,200}?,\\s+|en\\s+[^.;]{1,80}?\\s+|r[ée]unis?\\s+)?ne\\s+saurai(?:t|ent)\\s+(?:donc\\s+|d[éèe]s\\s+lors\\s+)?[êe]tre\\s+accueilli(?:s|e|es)?",
+   "family": "R3",
+   "version": "v36",
+   "bore": "Titre 12, chap. 121.61-62 (variante 'ne saurait/sauraient être accueilli(s)')",
+   "origin_ngram": "moyen ne saurait etre accueilli"
+  },
+  "R3_v10_n_est_des_lors_pas_fonde": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,?\\s*(?:qui\\s+[^.;]{1,150}?,\\s+|en\\s+[^.;]{1,80}?\\s+)?(?:n['’](?:est|ont)|ne\\s+sont)\\s+(?:donc\\s+)?(?:d[èe]s\\s+lors|pour\\s+autant|en\\s+cons[ée]quence)\\s+pas\\s+(?:donc\\s+)?fond[ée]s?",
+   "family": "R3",
+   "version": "v40",
+   "bore": "Titre 12, chap. 121.61-62 (variante 'dès lors / pour autant / en conséquence pas fondé')",
+   "origin_ngram": "n'est dès lors pas fondé"
+  },
+  "R2a_v3_melange_fait_droit_large": {
+   "regex": "m[ée]lang[ée](?:s|e|es)?\\s+de\\s+fait\\s+et\\s+de\\s+droit",
+   "family": "R2a",
+   "version": "v37",
+   "bore": "Titre 8, chap. 82 (entier - irrecevabilité moyen nouveau). Forme dissociée du sujet (moyen ... mélangé ...)",
+   "origin_ngram": "mélangé de fait et de droit"
+  },
+  "R3_v11_fonde_pour_le_surplus": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?(?:\\s+unique)?(?:[,\\s]+[^.;]{1,200}?)?(?:n['’]est|n['’]ont)\\s+(?:donc\\s+)?(?:pas\\s+)?fond[ée]s?\\s+pour\\s+le\\s+surplus",
+   "family": "R3",
+   "version": "v43",
+   "bore": "Titre 12, chap. 121.61-62 (variante 'n'est fondé pour le surplus' - moyen partiellement R1.b puis R3)",
+   "origin_ngram": "n'est pas fondé pour le surplus"
+  },
+  "R7a_v4_qui_manque_en_fait": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,?\\s*(?:qui\\s+[^.;]{1,150}?,?\\s+)?(?:en\\s+(?:sa\\s+|ses\\s+)?(?:premi[èe]re|deuxi[èe]me|second(?:e)?|troisi[èe]me|quatri[èe]me)\\s+branche,?\\s+)?manque(?:nt)?\\s+(?:par\\s+le\\s+fait\\s+qui\\s+lui\\s+sert\\s+de\\s+base|en\\s+fait)",
+   "family": "R7a",
+   "version": "v44",
+   "bore": "Titre 7, chap. 78.129 (variante avec relative)",
+   "origin_ngram": "moyen qui manque en fait"
+  },
+  "R3_v12_il_resulte_il_sensuit_moyen": {
+   "regex": "il\\s+(?:s['’]ensuit|en\\s+r[ée]sulte|en\\s+d[ée]coule)\\s+que\\s+(?:le\\s+|les\\s+)?moyens?\\s+(?:qui\\s+[^.;]{1,80}?,?\\s+)?(?:n['’]est\\s+pas\\s+fond[ée]|ne\\s+(?:peut|saurait)\\s+[êe]tre\\s+accueilli|est\\s+irrecevable)",
+   "family": "R3",
+   "version": "v45",
+   "bore": "Titre 12, chap. 121.61-62 (connecteur final 'il s'ensuit que le moyen...')",
+   "origin_ngram": "il s'ensuit que le moyen"
+  },
+  "R3_v46_incise_virgules_pas_fonde": {
+   "regex": "(?:(?:le\\s+|les\\s+)?moyens?|(?:le\\s+)?pourvoi|(?:le\\s+)?grief|il)\\s*,?\\s*(?:qui\\s+[^.;]{1,180}?,?\\s+|en\\s+[^.;]{1,80}?\\s+)?(?:n['’](?:est|ont)|ne\\s+sont)\\s*,?\\s*(?:donc|d[èe]s\\s+lors|en\\s+cons[ée]quence|pour\\s+autant|dans\\s+ces\\s+conditions)\\s*,?\\s*pas\\s+(?:donc\\s+)?fond[ée]s?",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.61-62 (incise dès lors/donc/en conséquence avec virgules tolérées + sujets élargis pourvoi/grief/il anaphorique + pluriel ne sont)",
+   "origin_ngram": "le moyen n'est, dès lors, pas fondé"
+  },
+  "R3_v46_relative_pas_fonde": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,\\s*qui\\s+[^.;]{1,180}?,\\s+(?:n['’](?:est|ont)|ne\\s+sont)\\s+(?:donc\\s+|d[èe]s\\s+lors\\s+)?pas\\s+(?:donc\\s+)?fond[ée]s?",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.61-62 (relative encadrée par virgules + n'est pas fondé, pluriel inclus)",
+   "origin_ngram": "le moyen, qui [postule|manque|est inopérant], n'est donc pas fondé"
+  },
+  "R3_v46_qui_sans_virgule_pas_fonde": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s+qui\\s+(?:soutient|soutiennent|postule(?:nt)?|prétend(?:ent)?)\\s+le\\s+contraire\\s+(?:n['’](?:est|ont)|ne\\s+sont)\\s+(?:donc\\s+)?pas\\s+fond[ée]s?",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.61-62 (relative compactée \"qui soutient/postule le contraire\")",
+   "origin_ngram": "le moyen qui soutient le contraire n'est donc pas fondé"
+  },
+  "R3_v46_ne_peut_incise_accueilli": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,?\\s*(?:qui\\s+[^.;]{1,180}?,?\\s+|en\\s+[^.;]{1,80}?\\s+)?ne\\s+(?:peut|peuvent|saurait|sauraient)\\s*,?\\s*(?:donc|d[èe]s\\s+lors|en\\s+cons[ée]quence)\\s*,?\\s*(?:pas\\s+)?(?:être|etre)\\s+accueilli(?:s|e|es)?",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.61-62 (ne peut/saurait + incise + être accueilli)",
+   "origin_ngram": "le moyen ne peut, dès lors, être accueilli"
+  },
+  "R3_v46_est_incise_irrecevable": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,?\\s*(?:qui\\s+[^.;]{1,180}?,?\\s+)?(?:est|sont)\\s+(?:donc|d[èe]s\\s+lors|en\\s+cons[ée]quence|partant)\\s+irrecevables?",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.51 (moyen est donc/dès lors irrecevable - extension R3_v6 avec incise)",
+   "origin_ngram": "le moyen est donc irrecevable"
+  },
+  "R3_v46_n_est_pas_recevable": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,?\\s*(?:qui\\s+[^.;]{1,180}?,?\\s+)?(?:n['’](?:est|ont)|ne\\s+sont)\\s*,?\\s*(?:(?:donc|d[èe]s\\s+lors|en\\s+cons[ée]quence|pour\\s+autant|dans\\s+ces\\s+conditions)\\s*,?\\s*)?pas\\s+recevables?",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.51 (irrecevabilité générique \"n'est pas recevable\" - convention V45 → R3) [v46.1 : sujet restreint à \"le moyen\" suite à Phase 4 - sujet élargi (pourvoi/grief/intervention) sans gain mesurable, retrait pour réduire surface de collision]",
+   "origin_ngram": "le moyen n'est pas recevable",
+   "patch_v47": "comma-incise tolerance (dès lors,/donc,/dans ces conditions) - strict superset of v46b; recovers 'n'est, dès lors, pas recevable'"
+  },
+  "R3_v46_en_consequence_moyen": {
+   "regex": "en\\s+cons[ée]quence,?\\s+(?:le\\s+|les\\s+)?moyens?\\s+(?:n['’](?:est|ont)|ne\\s+sont)\\s+(?:donc\\s+)?pas\\s+(?:fond[ée]s?|recevables?)",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.61-62 (connecteur initial \"en conséquence,\")",
+   "origin_ngram": "en conséquence, le moyen n'est pas recevable"
+  },
+  "R3_v46_ne_donne_pas_ouverture": {
+   "regex": "ne\\s+donne(?:nt)?\\s+pas\\s+ouverture\\s+(?:à|a)\\s+(?:la\\s+)?cassation",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.51-62 (formule classique \"ne donne pas ouverture à cassation\")",
+   "origin_ngram": "ne donne pas ouverture à cassation"
+  },
+  "R3_v46_griefs_pluriel_pas_fondes": {
+   "regex": "(?:les\\s+)?griefs?\\s*,?\\s*(?:qui\\s+[^.;]{1,180}?,?\\s+)?ne\\s+sont\\s+(?:donc\\s+)?pas\\s+fond[ée]s",
+   "family": "R3",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.61-62 (pluriel \"griefs\" au lieu de \"moyens\")",
+   "origin_ngram": "griefs qui soutiennent le contraire ne sont donc pas fondés"
+  },
+  "R1_v46_manifestement_pluriel": {
+   "regex": "(?:n['’]est|ne\\s+sont)\\s+manifestement\\s+pas\\s+de\\s+nature\\s+(?:à|a)\\s+entraîner\\s+la\\s+cassation",
+   "family": "R1",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121.21-25 (pluriel + singulier pour R1_n_est_manifestement_pas)",
+   "origin_ngram": "ne sont manifestement pas de nature à entraîner la cassation"
+  },
+  "R1_v46_PVC_prive_d_objet": {
+   "regex": "(?:est|se\\s+trouve|étant)?\\s*priv[ée]?\\s+d['’]objet\\s+(?:par\\s+le\\s+rejet|du\\s+fait\\s+du\\s+rejet|en\\s+raison\\s+du\\s+rejet)",
+   "family": "R1",
+   "version": "v46",
+   "bore": "Titre 12, chap. 121 (PVC variante \"privé d'objet par le rejet\")",
+   "origin_ngram": "privé d'objet par le rejet du premier moyen"
+  },
+  "R4_v46_incise_inoperant": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,?\\s*(?:qui\\s+[^.;,]{1,150}?,?\\s+)?(?:est|sont|étant)\\s*,?\\s*(?:donc|d[èe]s\\s+lors|en\\s+cons[ée]quence|dans\\s+ces\\s+conditions)\\s*,?\\s*inopérant(?:e|s|es)?",
+   "family": "R4",
+   "version": "v46",
+   "bore": "Titre 8, chap. 83 (incise donc/dès lors + inopérant - extension R4_moyen_inoperant)",
+   "origin_ngram": "le moyen est donc/dès lors inopérant"
+  },
+  "R4_v46_qui_est_inoperant": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,\\s*qui\\s+(?:est|sont)\\s+inopérant(?:e|s|es)?\\s*,",
+   "family": "R4",
+   "version": "v46",
+   "bore": "Titre 8, chap. 83 (relative encadrée \"qui est/sont inopérant\")",
+   "origin_ngram": "le moyen, qui est inopérant, ..."
+  },
+  "R7a_v46_qui_manque_relative": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*,\\s*qui\\s+manque(?:nt)?\\s+(?:par\\s+le\\s+fait\\s+qui\\s+lui\\s+sert\\s+de\\s+base|en\\s+fait)\\s*,?",
+   "family": "R7a",
+   "version": "v46",
+   "bore": "Titre 7, chap. 78.129 (relative compactée \"qui manque par le fait/en fait\")",
+   "origin_ngram": "le moyen, qui manque par le fait qui lui sert de base, ..."
+  },
+  "R2c_v46_position_prise_juges": {
+   "regex": "(?:la\\s+)?position\\s+(?:prise\\s+)?(?:devant\\s+)?(?:les?\\s+)?juges?\\s+du\\s+fond\\s*,\\s*est\\s+irrecevable",
+   "family": "R2c",
+   "version": "v46",
+   "bore": "Titre 8, chap. 82 (variante \"position prise devant les juges du fond, est irrecevable\")",
+   "origin_ngram": "la position prise devant les juges du fond, est irrecevable"
+  },
+  "R5_controle_restreint": {
+   "regex": "motifs?\\s+exempts?\\s+d['\\u2019]erreur\\s+manifeste\\s+d['\\u2019]appr[ée]ciation",
+   "description": "Contrôle restreint : la Cour ne réintervient pas car les motifs sont \"exempts d'erreur manifeste d'appréciation\". Variante de déférence judiciaire avec test minimal (Boré Titre 6).",
+   "examples": [
+    "c'est par des motifs exempts d'erreur manifeste d'appréciation que l'assemblée générale a décidé"
+   ],
+   "flags": null,
+   "added_in": "v46b_phase2.3 (généralisation civ - patch motifs_exempts_erreur, rattachement R5 confirmé doctrinalement)"
+  },
+  "R3_v47_grief_accueilli": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?)\\s*[,;]?\\s*(?:qui\\s+[^.;]{1,180}?[,;]?\\s+)?ne\\s+(?:peut|peuvent)\\s*[,;]?\\s*(?:donc(?:\\s+pas)?|d[èeé]s\\s*lors|partant|en\\s+cons[ée]quence|pas)?\\s*[,;]?\\s*(?:[eèéê]tre\\s+)?accueilli",
+   "family": "R3",
+   "version": "v47",
+   "bore": "Titre 12, chap. 121.61-62 (cloture R3 'le grief/moyen ne peut etre accueilli' + variantes 'donc/des lors/donc pas')"
+  },
+  "R3_v47_motifs_exempts_appreciation": {
+   "regex": "motifs?\\s+exempts?\\s+d['’\\\"]erreur\\s+manifeste\\s+d['’\\\"]appr[ée]ciation",
+   "family": "R3",
+   "version": "v47",
+   "bore": "Titre 12, chap. 121.61-62 (cloture R3 implicite 'motifs exempts d'erreur manifeste d'appreciation', formule civ2 EMA controle restreint)"
+  },
+  "R3_v47_sans_encourir_griefs": {
+   "regex": "sans\\s+encourir\\s+(?:le\\s+|les\\s+)?griefs?(?:\\s+du\\s+moyen)?",
+   "family": "R3",
+   "version": "v47",
+   "bore": "Titre 12, chap. 121.61-62 (cloture R3 'la cour d'appel a (statue/decide) sans encourir le(s) grief(s) du moyen')"
+  },
+  "R3_v48_souverainete": {
+   "regex": "(?:le\\s+|les\\s+)?moyens?\\s*[,;]?\\s*(?:qui\\s+[^.;]{1,180}?[,;]?\\s+)?ne\\s+tend(?:ent)?\\s+qu['’]\\s*[àa]\\s+(?:remettre|contester)\\s+(?:en\\s+(?:cause|discussion|question)\\s+)?(?:devant\\s+la\\s+cour\\s+de\\s+cassation\\s+)?l['’]appr[ée]ciation\\s+souveraine",
+   "family": "R3",
+   "version": "v48",
+   "bore": "Titre 12, chap. 121.61-62 (cloture R3 implicite 'le moyen ne tend qu'a remettre en cause / contester l'appreciation souveraine', co-occurrent R5 souverainete, formule doctrinale rejet au fond)"
+  },
+  "R7b_v47_manque_droit_etendu": {
+   "regex": "(?:(?:le\\s+|les\\s+)?(?:moyens?|griefs?))\\s*,?\\s*(?:qui\\s+[^.;]{1,180}?,?\\s+|en\\s+[^.;]{1,80}?\\s+)?(?:donc\\s+|d[èe]s\\s+lors,?\\s+)?manque(?:nt)?\\s+en\\s+droit",
+   "family": "R7b",
+   "version": "v47",
+   "bore": "Titre 12, 121.52 - moyen/grief qui manque en droit (extension grief + incise)",
+   "added_v47": "subject-anchored; 0 accepte; 16 aucun_match recovered + 15 multi-label"
+  },
+  "R7b_v47_manque_droit_inverse": {
+   "regex": "manque(?:nt)?\\s+en\\s+droit\\s+(?:le\\s+|les\\s+)?(?:moyens?|griefs?)\\s+qui",
+   "family": "R7b",
+   "version": "v47",
+   "bore": "Titre 12, 121.52 - forme inversée 'manque en droit le moyen qui'",
+   "added_v47": "subject-anchored; 0 accepte"
+  },
+  "R7a_v47_grief_manque_fait": {
+   "regex": "(?:le\\s+|les\\s+)?griefs?\\s*,?\\s*(?:qui\\s+[^.;]{1,180}?,?\\s+)?(?:donc\\s+|d[èe]s\\s+lors,?\\s+)?manque(?:nt)?\\s+en\\s+fait",
+   "family": "R7a",
+   "version": "v47",
+   "bore": "Titre 12, 121.52 - grief qui manque en fait (extension grief)",
+   "added_v47": "subject-anchored; 0 accepte; 6 aucun_match recovered"
+  },
+  "R4_v47_inoperant_en_ce_que": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?)\\s*,\\s*en\\s+ce\\s+qu['’][^.;]{1,160}?,\\s+(?:est|sont|étant)\\s+inop[ée]rant(?:e|s|es)?",
+   "family": "R4",
+   "version": "v47",
+   "bore": "Titre 12, 121.4 - moyen, en ce qu'il …, est inopérant (incise 'en ce que')",
+   "added_v47": "subject-anchored (exclut 'recherche inopérante'); 0 accepte; 17 aucun_match recovered"
+  },
+  "R3_v49_incise_libre_pas_fonde": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?|pourvois?)(?:\\s*,\\s*|\\s+qui\\s*,?\\s*)[^.;]{1,200}?,\\s*(?:n['’](?:est|ont)|ne\\s+sont)\\s+(?:(?:donc|d[èe]s\\s+lors|pour\\s+autant|en\\s+cons[ée]quence|dans\\s+ces\\s+conditions)\\s+){0,2}pas\\s+fond[ée]s?(?!\\s+[àa]\\b)",
+   "family": "R3",
+   "version": "v49",
+   "added_v48": "recall-rejet ; incise libre (non-'qui', 'qui,' avec virgule) + adverbe 'donc/dès lors' ; garde 'fondé à'"
+  },
+  "R3_v49_pronom_pas_fonde": {
+   "regex": "(?:celui-ci|ceux-ci)\\s+(?:n['’](?:est|ont)|ne\\s+sont)\\s+(?:(?:donc|d[èe]s\\s+lors|pour\\s+autant|en\\s+cons[ée]quence)\\s+){0,2}pas\\s+fond[ée]s?(?!\\s+[àa]\\b)",
+   "family": "R3",
+   "version": "v49",
+   "added_v48": "recall-rejet ; 'celui-ci/ceux-ci n'est pas fondé' (pronom = le moyen) ; garde 'fondé à'"
+  },
+  "R3_v49_pronom_accueilli": {
+   "regex": "(?:celui-ci|ceux-ci|il|ils)\\s+ne\\s+(?:peut|peuvent|saurait|sauraient)\\s+(?:donc\\s+|d[èe]s\\s+lors\\s+)?(?:être|etre)\\s+accueilli(?:s)?(?!\\s+qu['’])",
+   "family": "R3",
+   "version": "v49",
+   "added_v48": "recall-rejet ; '(il/celui-ci) ne peut être accueilli' ; garde 'accueilli qu'à' (admission partielle)"
+  },
+  "R4_v49_subject_inoperant": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?|branches?)(?:\\s*,\\s*|\\s+qui\\s*,?\\s*)?(?:[^.;]{0,200}?,\\s*)?(?:est|sont|étant|devenu[es]?)\\s+(?:(?:donc|d[èe]s\\s+lors|pour\\s+partie|en\\s+partie|dans\\s+ces\\s+conditions)\\s+){0,2}inop[ée]rant(?:e|s|es)?",
+   "family": "R4",
+   "version": "v49",
+   "added_v48": "recall-rejet ; sujet moyen/grief/branche EST inopérant (exclut 'recherche inopérante')"
+  },
+  "R2g_v49_subject_irrecevable": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?|pourvois?|branches?)(?:\\s*,\\s*|\\s+qui\\s*,?\\s*)?(?:[^.;]{0,200}?,\\s*)?(?:est|sont|étant)\\s+(?:(?:donc|d[èe]s\\s+lors|partant|en\\s+cons[ée]quence|pour\\s+partie)\\s+){0,2}irrecevables?",
+   "family": "R2g_irrecevable",
+   "version": "v49",
+   "added_v48": "recall-rejet ; sujet moyen/grief/pourvoi EST irrecevable (exclut 'irrecevable la demande/le recours')"
+  },
+  "R2g_v49_pronom_irrecevable": {
+   "regex": "(?:celui-ci|ceux-ci|il|ils)\\s+(?:est|sont)\\s+(?:donc\\s+|d[èe]s\\s+lors\\s+|partant\\s+)?irrecevables?(?!\\s+[àa]\\b)",
+   "family": "R2g_irrecevable",
+   "version": "v49",
+   "added_v48": "recall-rejet ; '(il/celui-ci) est (dès lors) irrecevable' ; garde 'irrecevable à'"
+  },
+  "R5_v49_ne_tend_qua": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?|pourvois?)(?:\\s*,\\s*|\\s+qui\\s*,?\\s*)?(?:[^.;]{0,150}?\\s+)?ne\\s+tend(?:ent)?\\s+qu['’]\\s*[àa]\\s+(?:remettre|contester|critiquer|inviter|obtenir)",
+   "family": "R5",
+   "version": "v49",
+   "added_v48": "recall-rejet ; 'le moyen ne tend qu'à remettre/contester' (formule de rejet quasi-univoque)"
+  },
+  "R6b_v49_court_exactement": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:le\\s+)?tribunal|(?:les\\s+)?juges?\\s+du\\s+fond|(?:le\\s+)?conseil\\s+de\\s+prud['’]hommes|(?:la\\s+)?cour\\s+nationale|elle|ayant)\\s+(?:[^.;]{0,120}?\\s+)?(?:en\\s+)?a(?:yant)?\\s+(?:[^.;]{0,40}?\\s+)?(?<!in)exactement\\s+(?:déduit|retenu|jugé|décidé|énoncé|considéré|estimé|apprécié|appliqué|qualifié)",
+   "family": "R6b",
+   "version": "v49",
+   "added_v48": "recall-rejet ; '[cour] a exactement déduit/retenu' (sujet=juridiction) ; garde 'inexactement'"
+  },
+  "R6b_v49_court_verbe_a_bon_droit": {
+   "regex": "(?:(?:la\\s+)?cour\\s+d['’]appel|(?:le\\s+)?tribunal|(?:les\\s+)?juges?\\s+du\\s+fond|(?:le\\s+)?conseil\\s+de\\s+prud['’]hommes|elle|il)\\s+(?:en\\s+)?a(?:\\s+(?:ainsi|donc))?\\s+(?:déduit|retenu|jugé|décidé|énoncé|statué|déclaré|débouté|estimé|considéré|rejeté|fait|appliqué|apprécié|qualifié)?,?\\s+[àa]\\s+bon\\s+droit",
+   "family": "R6b",
+   "version": "v49",
+   "added_v48": "recall-rejet ; '[cour] a (déduit/retenu/statué) à bon droit' (sujet=juridiction, exclut 'soutient à juste titre')"
+  },
+  "R7_v49_subject_manque": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?|branches?)(?:\\s*,\\s*|\\s+qui\\s*,?\\s*)?(?:[^.;]{0,200}?,?\\s*)?manque(?:nt)?\\s+(?:par\\s+le\\s+fait\\s+qui\\s+lui\\s+sert\\s+de\\s+base|en\\s+fait)",
+   "family": "R7a",
+   "version": "v49",
+   "added_v48": "recall-rejet ; 'le moyen/grief/branche manque en fait/droit / par le fait qui lui sert de base'"
+  },
+  "R5_v49b_interpretation_souveraine": {
+   "regex": "interpr[ée]tations?\\s+souveraines?|interpr[ée]t\\w*\\s+souverainement",
+   "note": "v49"
+  },
+  "R6b_v49b_pluriel_ont": {
+   "regex": "(?:ils|elles)\\s+ont\\s+(?:pu\\s+(?:en\\s+)?(?:déduire|décider|retenir|juger|considérer|estimer|conclure|énoncer)|exactement\\s+(?:décidé|jugé|retenu|déduit|énoncé|considéré|estimé|apprécié|appliqué))",
+   "note": "v49"
+  },
+  "R6b_v49b_exactement_elide": {
+   "regex": "\\ba\\s+exactement\\s+(?:déduit|retenu|décidé|énoncé|jugé|considéré|estimé|appliqué|apprécié|qualifié)\\s+qu|(?:ayant|avoir)\\s+exactement\\s+(?:déduit|retenu|décidé|énoncé)",
+   "note": "v49"
+  },
+  "R7b_v49_subject_manque_droit": {
+   "regex": "(?:le\\s+|les\\s+)?(?:moyens?|griefs?|branches?)(?:\\s*,\\s*|\\s+qui\\s*,?\\s*)?(?:[^.;]{0,200}?,?\\s*)?manque(?:nt)?\\s+en\\s+droit",
+   "note": "v49"
+  }
+ },
+ "family_aggregation": {
+  "R1": [
+   "R1a_RNSM_total",
+   "R1b_RNSM_partiel",
+   "R1_n_est_manifestement_pas",
+   "R1_v46_manifestement_pluriel",
+   "R1_v46_PVC_prive_d_objet"
+  ],
+  "R2a": [
+   "R2a_moyen_nouveau",
+   "R2a_partant_irrecevable",
+   "R2a_v3_melange_fait_droit_large"
+  ],
+  "R2b": [
+   "R2b_motif_surabondant_critique"
+  ],
+  "R2c": [
+   "R2c_moyen_incompatible",
+   "R2c_v46_position_prise_juges"
+  ],
+  "R2d": [
+   "R2d_moyen_imprecis"
+  ],
+  "R2e": [
+   "R2e_sans_interet",
+   "R2e_privé_de_portee"
+  ],
+  "R2g_irrecevable": [
+   "R3_v6_moyen_irrecevable",
+   "R3_v46_est_incise_irrecevable",
+   "R3_v46_n_est_pas_recevable",
+   "R2g_v49_subject_irrecevable",
+   "R2g_v49_pronom_irrecevable"
+  ],
+  "R3": [
+   "R3a_moyen_non_fonde",
+   "R3a_dou_il_suit",
+   "R3a_ne_peut_etre_accueilli",
+   "R3_v2_post2019",
+   "R3_v2_ne_peut_prosperer",
+   "R3_v3_pluriel",
+   "R3_v4_fonde_en_aucune_branches",
+   "R3_v4_dou_il_suit_relative",
+   "R3_pre1990_dou_il_suit_archaic",
+   "R3_v6_moyens_pluriel_relative",
+   "R3_v7_n_encourt_pas_griefs",
+   "R3_v8_ne_saurait_etre_accueilli_relative",
+   "R3_v10_n_est_des_lors_pas_fonde",
+   "R3_v11_fonde_pour_le_surplus",
+   "R3_v12_il_resulte_il_sensuit_moyen",
+   "R3_v46_incise_virgules_pas_fonde",
+   "R3_v46_relative_pas_fonde",
+   "R3_v46_qui_sans_virgule_pas_fonde",
+   "R3_v46_ne_peut_incise_accueilli",
+   "R3_v46_en_consequence_moyen",
+   "R3_v46_ne_donne_pas_ouverture",
+   "R3_v46_griefs_pluriel_pas_fondes",
+   "R3_v47_grief_accueilli",
+   "R3_v47_motifs_exempts_appreciation",
+   "R3_v47_sans_encourir_griefs",
+   "R3_v48_souverainete",
+   "R3_v49_incise_libre_pas_fonde",
+   "R3_v49_pronom_pas_fonde",
+   "R3_v49_pronom_accueilli"
+  ],
+  "R4": [
+   "R4_moyen_inoperant",
+   "R4_grief_inoperant",
+   "R4_v46_incise_inoperant",
+   "R4_v46_qui_est_inoperant",
+   "R4_v47_inoperant_en_ce_que",
+   "R4_v49_subject_inoperant"
+  ],
+  "R5": [
+   "R5a_souverainement",
+   "R5a_pouvoir_souverain",
+   "R5a_appreciation_souveraine",
+   "R5b_remettre_en_discussion",
+   "R5c_hors_denaturation",
+   "R5_v3_elle_souverainement",
+   "R5_v4_appreciant_souverainement",
+   "R5_v4_appreciation_souveraine_elements",
+   "R5_v4_souverainement_apprecies",
+   "R5_v4_remettre_en_cause_appreciation",
+   "R5_v5_apprec_souverainement_elements",
+   "R5_v6_contester_appreciation",
+   "R5_v6_apprecient_souverainement_verbe",
+   "R5_v8_sous_couvert_griefs_remettre",
+   "R5_controle_restreint",
+   "R5_v49_ne_tend_qua",
+   "R5_v49b_interpretation_souveraine"
+  ],
+  "R6a": [
+   "R6a_a_pu",
+   "R6a_v2_a_pu_large",
+   "R6a_v3_a_pu",
+   "R6a_pre1990_a_pu_archaic",
+   "R6a_v5_sujets_alt_a_pu"
+  ],
+  "R6b": [
+   "R6b_exactement",
+   "R6b_a_bon_droit",
+   "R6b_exacte_application",
+   "R6b_v3_exactement",
+   "R6b_v3_a_bon_droit",
+   "R6b_v4_decide_a_bon_droit",
+   "R6b_v4_c_est_a_bon_droit",
+   "R6b_v5_en_a_exactement",
+   "R6b_pre1990_a_exactement_archaic",
+   "R6b_v49_court_exactement",
+   "R6b_v49_court_verbe_a_bon_droit",
+   "R6b_v49b_pluriel_ont",
+   "R6b_v49b_exactement_elide"
+  ],
+  "R7a": [
+   "R7a_manque_en_fait",
+   "R7a_v4_qui_manque_en_fait",
+   "R7a_v46_qui_manque_relative",
+   "R7a_v47_grief_manque_fait",
+   "R7_v49_subject_manque"
+  ],
+  "R7b": [
+   "R7b_manque_en_droit",
+   "R7b_v47_manque_droit_etendu",
+   "R7b_v47_manque_droit_inverse",
+   "R7b_v49_subject_manque_droit"
+  ],
+  "R8": [
+   "R8a_motif_pur_droit",
+   "R8a_legalement_justifiee",
+   "R8_v2_a_legalement_justifie",
+   "R8_v2_justifie_legalement",
+   "R8_v3_legalement_justifie",
+   "R8_v3_a_justifie",
+   "R8_v4_legalement_justifie_corrige"
+  ],
+  "R9": [
+   "R9_motifs_propres_adoptes",
+   "R9_motifs_premiers_juges"
+  ],
+  "R10": [
+   "R10_atteinte_disproportionnee",
+   "R10_juste_equilibre"
+  ],
+  "R12": [
+   "R12_motifs_surabondants"
+  ],
+  "R8a": [
+   "R8a_motif_pur_droit"
+  ],
+  "R8b": [
+   "R8a_legalement_justifiee",
+   "R8_v2_a_legalement_justifie",
+   "R8_v2_justifie_legalement",
+   "R8_v3_legalement_justifie",
+   "R8_v3_a_justifie",
+   "R8_v4_legalement_justifie_corrige"
+  ],
+  "R8c": []
+ },
+ "baseline_metrics_requal_civils_1990plus": {
+  "n": 5740,
+  "coverage": 0.8502,
+  "angle_mort": 0.1498,
+  "multi_label_ge2": 0.3456,
+  "multi_label_ge3": 0.1052
+ },
+ "phenomena_to_preserve": [
+  "Bascule R3 -> R1 vers 2014-2020 : R1 passe de <5% en 2010 a >74% en 2020-2025 sur soc",
+  "R6a (contrôle léger) >> R6b (contrôle lourd), ratio ~2.5:1 sur requalification"
+ ],
+ "rules": {
+  "R8c_confirmation_R3": "R8c is TRUE when: R3=True AND R8b=True AND the minimum distance between an R3 match and an R8b match is < 250 characters. Implemented in pipeline/classify_lib.py:post_process_r().",
+  "R9_filter_FP_moyen": "R9 (own and adopted grounds): a hit is invalidated when its preceding 200-character context contains a strong marker of the ground being stated (\"AUX MOTIFS\", \"ALORS QU'en retenant\", \"fait grief\", \"selon le moyen\", \"reproche a l'arret\") WITHOUT an intervening marker of the Court's own reasoning (\"Mais attendu que\", \"Reponse de la Cour\"). Implemented in pipeline/classify_lib.py:post_process_r()."
+ },
+ "_version_note": "v50 removes 7 patterns with zero occurrence on the reference corpus (R2c_these_contraire, R3_pre1990_n_est_pas_fonde_archaic, R3_pre1990_ne_peut_etre_accueilli_archaic, R3_v3_pourvoi_non_fonde, R5_v10_violation_aucune_regle, R5_v9_inviter_cour_nouvel_examen, R8a_substituer_motif_pur_droit), also removed from family_aggregation. Redundant patterns (that never alone drive a decision) are kept on purpose. Verified at 0-diff by a full replay on the reference corpus: the classification is unchanged."
+}
