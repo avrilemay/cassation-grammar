@@ -43,7 +43,7 @@ If you already have a local Judilibre dump, point `config.yaml::data.clean_pickl
 cassation-grammar/
 ├── config.yaml              single configuration file: every input/output path, every parameter
 ├── requirements.txt
-├── LICENSE                  placeholder, code licence pending confirmation (see below)
+├── LICENSE                  MIT, for the code (the dataset has its own licence, see below)
 ├── pipeline/                the four numbered steps, plus shared modules and small reference files
 │   ├── 01_collect.py .. 04_articles.py
 │   ├── _config.py           config.yaml loader, used by every step
@@ -76,4 +76,4 @@ A machine-readable version of this reference is in `CITATION.cff`.
 Two different licences apply, to two different things:
 
 - **The dataset** (the published ground-reasons pairs, on Zenodo) is under the **Licence Ouverte 2.0 / Open Licence 2.0** (Etalab), the same licence as the source Judilibre data. The full terms and the citation are on the Zenodo record, next to the data.
-- **The code** (`pipeline/`, `grids/`, `baselines/`) is under the licence in `LICENSE`, currently a placeholder pending confirmation by the host institution (withheld here for anonymous submission).
+- **The code** (`pipeline/`, `grids/`, `baselines/`) is under the MIT licence (see `LICENSE`).

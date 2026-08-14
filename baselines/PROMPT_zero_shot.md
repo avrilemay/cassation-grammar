@@ -1,42 +1,6 @@
 # Zero-shot LLM baseline: canonical prompts (v1.0)
 
-The single versioned source of the two prompts `baselines/llm_zero_shot.py` sends
-(the script parses this file between the HTML markers below). A revision is a new
-version number with new markers, never an edit of the text a published run used.
-
-## Design decisions
-
-1. French, with the French doctrinal name of every family, matching the underlying
-   doctrine (Boré et Boré, *La cassation en matière civile*, Dalloz Action, 6e éd.
-   2023-2024) and the language of the human annotation campaign.
-2. The family definitions are the annotation guides' own definitions
-   (`gold/guides/guide_familles_ACCEPTE.html`, `guide_familles_REJETE.html`), worked
-   examples removed: the model gets the doctrine, not worked cases.
-3. The response space matches the two blind annotation interfaces exactly. Accepted
-   side: one choice among 9 numbered options in cascade order, 9 being
-   "Autre / Indéterminé". Rejected side: a multi-label choice among the three Boré
-   families plus a separate, non-cumulative "Indéterminé". The two sides do not
-   share one schema.
-4. Tie-break on the accepted side only: the guide's own cascade order, most specific
-   family first, VIOLATION as the generic default. The rejected-side guide asks for
-   the opposite and the prompt keeps its mechanism unchanged: three independent
-   yes/no questions in the guide's order (RNSM, IRRECEVABILITÉ, FOND), several
-   families may stand, since one ground can meet a ritual formula on one branch and
-   a reasoned rejection on another.
-5. No typical wording anywhere: the closing formulas the guides quote as
-   illustrative ("le moyen est irrecevable", "n'a pas donné de base légale à sa
-   décision", ...) are left out. Those canonical strings are the rule-based grid's
-   territory (`grids/`), and handing them to the model would make this a disguised
-   keyword baseline. One declared exception: the RNSM definition keeps the ritual
-   sentence of article 1014, because RNSM is defined by that very formula and the
-   annotators' guides contained it.
-6. No example drawn from the corpus appears anywhere in the prompt.
-
----
-
 ## Prompt, accepted side (cas d'ouverture à cassation)
-
-Single choice among 9 numbered options, JSON output `{"famille": "<code>"}`.
 
 <!-- PROMPT_ACCEPTE_V1_START -->
 ```text
@@ -138,12 +102,7 @@ VICE_MOTIFS, DENATURATION, MBL, VIOLATION, autre_indetermine.
 ```
 <!-- PROMPT_ACCEPTE_V1_END -->
 
----
-
 ## Prompt, rejected side (fondement du rejet)
-
-Multi-label among 3 families, plus a non-cumulative "Indéterminé", JSON output
-`{"familles": [...], "indetermine": <bool>}`.
 
 <!-- PROMPT_REJETE_V1_START -->
 ```text
@@ -212,24 +171,3 @@ IRREC, FOND (jamais autre chose), et "indetermine" vaut true uniquement si la
 liste "familles" est vide.
 ```
 <!-- PROMPT_REJETE_V1_END -->
-
----
-
-## Provenance
-
-The definitions come from the `Définition :` paragraph of each family in the two
-guides the human annotators of `gold/gold_accepte.jsonl` / `gold/gold_rejete.jsonl`
-worked from. Three meaning-preserving normalisations were applied and nothing else
-was reworded: legal abbreviations spelled out (`art. 4 et 5 CPC` becomes
-`articles 4 et 5 du code de procédure civile`), the `(a)` / `(b)` enumerators of
-VICE_FORME rendered as `D'une part` / `D'autre part`, and guillemets dropped around
-the one doctrinal principle quoted inside a definition (DENATURATION).
-
-The guides also contained material left out of the prompt on purpose. This included
-the worked examples and the quoted closing formulas ("verdicts types" / "formules
-clés"). It also included the corpus base rates and effectifs, which would hand the
-model the label prior of the very set it is scored on, and, for CONTRARIETE_JUGEMENTS,
-would tell it outright never to pick that option. It also included cross-references
-to guide sections the prompt does not carry. Interface details
-(shortcuts, highlighting, export) served only to reconstruct the response space,
-never as definitional text.

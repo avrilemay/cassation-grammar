@@ -1,10 +1,21 @@
-[PLACEHOLDER: licence for the code, pending confirmation by the host institution]
+MIT License
 
-This placeholder covers the code in this repository (pipeline/, grids/, baselines/).
-It does not cover the dataset: the dataset (ground-reasons pairs, published on Zenodo,
-see the top-level README.md) is distributed separately under the Licence Ouverte 2.0 /
-Open Licence 2.0 (Etalab).
+Copyright (c) 2026 Avrile Floro, Tamara Dhorasoo, Nils Holzenberger, Thomas Le Goff, Tiphaine Viard, Maria Boritchev
 
-The final choice of licence for the code in this repository is pending confirmation by
-the host institution [PLACEHOLDER: institution, withheld here for anonymous submission].
-Until that confirmation, no licence grant should be assumed beyond what is stated here.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
