@@ -15,7 +15,7 @@ Python 3.10 or later, in a virtual environment (a bare `pip install` on a shared
 
 ## Getting the data
 
-The published dataset (`cassation_pairs_2016_2025_v1.1.jsonl`) is deposited on Zenodo at [PLACEHOLDER: Zenodo record URL / DOI]. If you received this repository as a full archive, the file is already in `data/`. It is not tracked by git (hundreds of MB). Download it if you only want the labelled pairs, without re-running the pipeline.
+The published dataset (`cassation_pairs_2016_2025_v1.1.jsonl`) is deposited on Zenodo at https://doi.org/10.5281/zenodo.21932747. If you received this repository as a full archive, the file is already in `data/`. It is not tracked by git (hundreds of MB). Download it if you only want the labelled pairs, without re-running the pipeline.
 
 Running the four steps below reproduces the classification (status, doctrinal family, article layer) exactly, byte for byte, against the internal reference corpus. The published copy additionally goes through a pseudonymisation pass described in the datasheet on the Zenodo record, so a local re-run reproduces the labels, not the published file byte for byte.
 
