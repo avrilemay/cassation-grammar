@@ -5,7 +5,7 @@ A French cassation ruling answers each *ground* (a distinct legal complaint agai
 ## Installation
 
 ```
-git clone [PLACEHOLDER: repository URL]
+git clone https://github.com/avrilemay/cassation-grammar.git
 cd cassation-grammar
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
