@@ -4,7 +4,7 @@ A ruling of the French Court of Cassation answers each ground of appeal with its
 
 This repository holds the code that builds the dataset. It also holds the two sets of classification rules, the human annotations used to check the labels, and the code for the baselines reported in the paper.
 
-The dataset is on Zenodo at https://doi.org/10.5281/zenodo.21932747. It can also be browsed online at https://grammaire-cassation.fr. The paper is under review. Its reference is at the end of this page.
+The dataset is on Zenodo at https://doi.org/10.5281/zenodo.21932747. It can also be browsed online at https://grammaire-cassation.fr. The paper was accepted at JURIX 2026 and is on arXiv at https://arxiv.org/abs/2610.31116. Its reference is at the end of this page.
 
 ## Getting the data
 
@@ -43,10 +43,13 @@ cassation-grammar/
 
 ```bibtex
 @misc{floro2026grammar,
-  author = {Floro, Avrile and Dhorasoo, Tamara and Holzenberger, Nils and Le Goff, Thomas and Viard, Tiphaine and Boritchev, Maria},
-  title  = {A Grammar of French Civil Cassation: A Ground-Level Dataset and Tool},
-  year   = {2026},
-  note   = {Under review}
+  author        = {Floro, Avrile and Dhorasoo, Tamara and Holzenberger, Nils and Le Goff, Thomas and Viard, Tiphaine and Boritchev, Maria},
+  title         = {A Grammar of French Civil Cassation: A Ground-Level Dataset and Tool},
+  year          = {2026},
+  eprint        = {2610.31116},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2610.31116},
+  note          = {Accepted at JURIX 2026}
 }
 ```
 
